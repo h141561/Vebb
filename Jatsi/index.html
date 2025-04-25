@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function kast(){
+            let terningar = document.getElementsByClassName('terning');
+            for(let i = 0; i < terningar.length;i++){
+                if(!terningar[i].classList.contains('hold')){
+                    let tal = Math.floor(Math.random() * 6) +1;
+                    terningar[i].innerHTML = tal;
+                    terningar[i].classList.remove(1,2,3,4,5,6);
+                    terningar[i].classList.add(tal);
+                }
+                console.log(i);
+                switch(terningar[i].innerHTML){
+                    case '1':
+                        terningar[i].innerHTML = '<img src="64px-Dice-1-b.svg.png" alt="" style=" width:40px; height:40px;">';
+                        break;
+                    case '2':
+                        terningar[i].innerHTML = '<img src="64px-Dice-2-b.svg.png" alt="" style=" width:40px; height:40px;">';
+                        break;
+                    case '3':
+                        terningar[i].innerHTML = '<img src="64px-Dice-3a-b.svg.png" alt="" style=" width:40px; height:40px;">';
+                        break;
+                    case '4':
+                        terningar[i].innerHTML = '<img src="64px-Dice-4-b.svg.png" alt="" style=" width:40px; height:40px;">';
+                        break;
+                    case '5':
+                        terningar[i].innerHTML = '<img src="64px-Dice-5-b.svg.png" alt="" style=" width:40px; height:40px;">';
+                        break;
+                    case '6':
+                        terningar[i].innerHTML = '<img src="64px-Dice-6-b.svg.png" alt="" style=" width:40px; height:40px;">';
+                        break;
+                }
+            }
+            let kastnr = document.getElementById('kastnr');
+            kastnr.innerHTML = Number(kastnr.innerHTML) + 1;
+        }
+        function clickMe(self){
+            self.classList.toggle('hold');
+        }
+        function clearSelect(){
+            let terningar = document.getElementsByClassName('terning');
+            for(let i = 0; i < terningar.length; i++){
+                terningar[i].classList.remove('hold');
+            }
+            kast();
+            document.getElementById('kastnr').innerHTML = 0;
+        }
+    </script>
+</head>
+<body onload="kast()">
+    <article>
+        <h1>
+            MEGA-MAXI YATZIES!
+        </h1>
+        
+        <div id="terningar">
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+            <button name="" onclick="clickMe(this)" class="terning"></button>
+        </div>
+
+        <p>
+            kast NR:<span id="kastnr">-1</span>
+        </p>
+
+        <button name="kast" id="kastKnapp" class="fun" onclick="kast()">kast</button>
+        <button name="clear" class="fun" onclick="clearSelect()">CLR</button>
+    </article>
+</body>
+</html>

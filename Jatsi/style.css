@@ -1,0 +1,36 @@
+article{
+    min-width: 200px;
+    background-color: lightblue;
+    border: 1px black dotted;
+    text-align: center;
+    max-width: 90%;
+}
+#terningar{
+    display: grid;
+    width: 50%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin: auto;
+
+}
+.terning{
+   background-color: lightblue;
+   border: 0px hidden;
+   width: 44px;
+   height: 44px;
+   padding: 0px;
+   border-radius: 4px;
+   margin:3px;
+}
+
+.fun{
+    background-color: blue;
+    padding: 1em;
+    color: white;
+    border-radius: 1em;
+}
+.hold{
+    background-color: greenyellow;
+}
+#tst{
+    background-color: wheat;
+}

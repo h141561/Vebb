@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .talet, .resultat{
+            color: green;
+        }
+        .aktiv{
+            background-color: lightgreen;
+        }
+        .inaktiv{
+            background-color: lightcoral;
+        }
+    </style>
+    <script>
+        function kalkyle(){
+            let talet = document.getElementById("nummer").value;
+            console.log(talet);
+
+            let spans = document.getElementsByClassName("talet");
+            for(let i = 0; i < spans.length; i++){
+                spans[i].innerHTML = talet;
+            }
+            document.getElementById("halva").innerHTML = talet / 2;
+            document.getElementById("doble").innerHTML = talet * 2;
+            document.getElementById("triple").innerHTML = talet * 3;
+            document.getElementById("kvad").innerHTML = talet * talet;
+        }
+        function gjerRaude(){
+            feldt = document.getElementsByClassName("tempFeldt");
+            for(let i = 0; i < feldt.length; i++){
+                feldt[i].classList.remove('aktiv');
+                feldt[i].classList.add("inaktiv");
+                
+            }
+        }
+        function kel(input){
+            console.log(document.getElementById("kel").value);
+            gjerRaude();
+            document.getElementById
+            input.classList.add("aktiv");
+            input.classList.remove("inaktiv");
+            document.getElementById("cel").value = Number(input.value) - 273;
+            document.getElementById("far").value = ((Number(input.value) * (9/5) ) - 459.67);
+        }
+        function cel(input){
+            console.log(input);
+            gjerRaude();
+            input.classList.add("aktiv");
+            input.classList.remove("inaktiv");
+            document.getElementById("kel").value = minMinimum(0,Number(input.value) + 273);
+            document.getElementById("far").value = Number(input.value)*(9/5) + 32;
+        }
+        function far(input){
+            console.log(input);
+            gjerRaude();
+            input.classList.add("aktiv");
+            input.classList.remove("inaktiv");
+            document.getElementById("cel").value = (Number(input.value) - 32) /1.8;
+            document.getElementById("kel").value = minMinimum(0,(Number(input.value) + 459.67)*(5/9));
+        }
+        
+        function minMinimum(x,y){
+            if(x > y){
+                return x;
+            }
+            return y;
+        }
+        function strLen(){
+            let tekst = document.getElementById("tekstInput");
+            console.log(tekst);
+            document.getElementById("len").innerHTML = tekst.length;
+        }
+    </script>
+
+</head>
+<body>
+
+    <input type="text" name="" id="teksInput">
+    <button onclick="strLen()">lengde</button>
+        <p id="len"></p>
+    <input type="number" class="tempFeldt" id="cel" on oninput="cel(this)"><button>Celsius</button><br>
+    <input type="number" class="tempFeldt" id="kel" min="0" oninput="kel(this)"><button>Kelvin</button><br>
+    <input type="number" class="tempFeldt" id="far" on oninput="far(this)"><button>Fahrenheit</button><br>
+
+    <input type="number" name="" id="nummer" min="0" max="9">
+    <button onclick="kalkyle()">rekn ut</button>
+    <p>Halvparten av <span class="talet"></span> er 
+            <span class="resultat" id="halva"></span>
+        </p>
+    <p>Det doble av <span class="talet"></span> er 
+            <span class="resultat" id="doble"></span>
+        </p>
+    <p>Tre gongar   <span class="talet"></span> er
+            <span class="resultat" id="triple"></span>
+        </p>
+    <p>Kvadratet av <span class="talet"></span> er 
+            <span class="resultat" id="kvad"></span>
+        </p>
+</body>
+</html>

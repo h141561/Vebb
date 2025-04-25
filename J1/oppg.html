@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fargeSpor(){
+            let namn = prompt("skriv in namnet ditt");
+            let farge = prompt("skriv in favorittfargen din");
+            window.alert("Hei " + namn + ", eg høyrar du likar " + farge);
+        }
+        function oppg3(){
+            let fornamn = document.getElementById("fornamn").value;
+            let etterNamn = document.getElementById("eNamn").value;
+            window.alert("Hei " + fornamn + " " + etterNamn);
+        }
+        function oppg4(adresse){
+            console.log(adresse)
+            let bilete = document.getElementById("Bilete");
+            bilete.src = adresse;
+        }
+        function farg(blokk){
+            let skriftblokk = document.getElementById(blokk);
+            skriftblokk.classList.toggle('raud');
+        }
+        function repeter(){
+            let underTekst = document.getElementById("underTekst");
+            underTekst.innerHTML = document.getElementById("tekstBoks").value;
+        }
+    </script>
+    <style>
+        .raud{
+            color: red;
+        }
+        #tekstBoks{
+            width: 400px;
+            height: 100px;
+        }
+        #underTekst{
+            width: 400px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="tekstBoks" type="text" width="400px" height="200px" oninput="repeter()"></textarea>
+    <div id="underTekst">f</div>
+<br>
+    <button onclick="repeter()">oppg2</button>
+<br>
+    <input type="text" id="fornamn" alt="fornamn">
+    <input type="text" name="" id="eNamn" alt="etterNamn">
+
+    <button onclick="oppg3()">Oppg 3</button>
+
+    <br>
+
+    <img id="Bilete" src="" alt="" width="400px" height="400px">
+    <button onclick="oppg4('../Netttad/brod.jpg')">brod</button>
+    <button onclick="oppg4('../Netttad/baklava.jpg')">baklava</button>
+    <br>
+    
+    <h1 id="H1">Nr .1</h1>
+        <button onclick="farg('H1')">Farg Meg</button>
+    <h1 id="H2">Nr .2</h1>
+        <button onclick="farg('H2')">Farg Meg</button>
+    <h1 id="H3">Nr .3</h1>
+        <button onclick="farg('H3')">Farg Meg</button>
+    <h1 id="H4">Nr .4</h1>
+        <button onclick="farg('H4')">Farg Meg</button>
+<br>
+    
+
+</body> 
+</html>
