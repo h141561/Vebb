@@ -70,18 +70,53 @@
             return y;
         }
         function strLen(){
-            let tekst = document.getElementById("tekstInput");
-            console.log(tekst);
+            //farleg farleg farleg
+            tekst = document.getElementById("tekstInput").value;
+            console.log(tekst.value);
             document.getElementById("len").innerHTML = tekst.length;
+        }
+        function upper(){
+            //farleg farleg farleg
+            tekst = document.getElementById("tekstInput").value;
+                    document.getElementById("upper").innerHTML = tekst.toUpperCase();
+        }
+        function lower(){
+            //farleg farleg farleg
+            tekst = document.getElementById("tekstInput").value;
+                    document.getElementById("lower").innerHTML = tekst.toLowerCase();
+        }
+
+        function svampe(){
+            //farleg farleg farleg
+            tekst = document.getElementById("tekstInput").value;
+            let svampeTekst = "";
+            for(let i = 0; i < tekst.length; i++){
+                if(i % 2 == 0)
+                    svampeTekst += tekst[i].toLowerCase();
+                else
+                    svampeTekst += tekst[i].toUpperCase();
+            }
+        
+            document.getElementById("svampe").innerHTML = svampeTekst;
         }
     </script>
 
 </head>
 <body>
 
-    <input type="text" name="" id="teksInput">
+    <input type="text" name="" id="tekstInput"><br>
     <button onclick="strLen()">lengde</button>
-        <p id="len"></p>
+        <span id="len"></span><br>
+    
+    <button onclick="upper()">upper</button>
+        <span id="upper"></span><br>
+
+    <button onclick="lower()">lower</button>
+        <span id="lower"></span><br>
+
+    <button onclick="svampe()">sVaMpEbOB</button>
+        <span id="svampe"></span><br>
+
     <input type="number" class="tempFeldt" id="cel" on oninput="cel(this)"><button>Celsius</button><br>
     <input type="number" class="tempFeldt" id="kel" min="0" oninput="kel(this)"><button>Kelvin</button><br>
     <input type="number" class="tempFeldt" id="far" on oninput="far(this)"><button>Fahrenheit</button><br>
