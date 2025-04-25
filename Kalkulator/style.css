@@ -1,0 +1,148 @@
+*{
+    font-family: monospace;
+    user-select: none;
+}
+header{
+    /* background-color: blue; */
+    /* max-height: 10vh; */
+    /* min-height: 10vh; */
+    margin: 0px;
+}
+div#knappar{
+    display: inline-grid;
+    grid-template-areas: 
+        "funksjonKnappar funksjonKnappar"
+        "talKnappar aritmatikkKnappar";
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    background-color: rgb(0, 255, 0);
+    border: 3px black solid;
+    border-radius: 1em;
+    padding-bottom: 10px;
+    width: 100%;
+}
+#erLik{
+    background-color: rgb(250, 184, 0);
+    grid-template-rows: 3;
+    grid-template-columns: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    height: 9em;
+}
+article{
+    width: 500px;
+    border: 1px red solid;
+    height: 900px;
+    background-color: rgb(255, 0, 0);
+    padding: 1em;
+    border-radius: 0em 0em 1em 1em;
+    margin: auto;
+    margin-top: 0;
+}
+#variabelKnappar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 0px 10px 0px;
+}
+.variabelDiv{
+    display: flex;
+    background-color: gold;
+    padding: 10px;
+    width: 100px;
+    border-radius: 1em;
+}
+.variabelDiv  *{
+    min-width: 1.21em;
+}
+.variabelDiv > p{
+
+}
+div.funksjonKnappar{
+    align-items: center;
+    grid-area: funksjonKnappar;
+    border: 1px black dotted;
+    width: 100%;
+}
+div.talKnappar{
+    grid-area: talKnappar;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px black dotted;
+}
+div.aritmatikkKnappar{
+    grid-area: aritmatikkKnappar;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px black dotted;
+}
+button{
+    background-color: white;
+    border: hidden;
+    padding: 1px;
+    border: white 4px solid;
+    border-radius: 10px;
+    margin: 2px;
+}
+
+button:active{
+
+}
+#overskrift{
+    display: grid;
+}
+#tekstfelt{
+    width: 80%;
+    height: 10%;
+    background-color: white;
+    text-align: right;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    border-radius: 1em;
+    padding: 1em;
+    font-size: 2em;
+    margin: 1em;
+    line-height: 0em;
+}
+
+button.talKnapp{
+    width: 90%;
+    height: 4em;
+    font-size: 1em;
+    margin: 0.3em;
+    padding: 0px;
+
+}
+.inline{
+    font-size: 2em;
+    margin: 0px;
+
+}
+button.funKnapp{
+    width: 4em;
+    height: 2em;
+    background-color: darkgray;
+    border: hidden;
+    
+}
+button.radKnapp{
+    box-shadow: inset 0px 0px 25px #ff0000;
+    border: 2px solid black;
+}
+button.radKnapp.active{
+    
+    background-color: rgb(5, 255, 5); 
+    box-shadow: 0px 0px 0px 0px;
+     
+}
+.knapp{
+    box-shadow: 0px 2px 1px 0px;
+}
+.knapp:active{
+    box-shadow: 0px;
+    box-shadow: 0px 0px 0px 0px;
+    position: relative;
+    bottom: -2px;
+    border: 1px black solid
+}

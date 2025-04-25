@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+<body onload="main()">
+    <header>
+        f
+    </header>
+    <article>
+       
+            <input name="matteFel" type="any" id="tekstfelt" value="0">
+         
+       
+        
+        <div id="variabelKnappar">
+            <div class="variabelDiv">
+                <p class="inline">X=</p>
+                <input id="Xknapp" name="Xinput" type="number" value="0">
+            </div>
+            <div class="variabelDiv">
+                <p class="inline">Y=</p>
+                <input id="Yknapp" name="Yinput" type="number" value="0">
+            </div>
+            <div class="variabelDiv">
+                <p class="inline">Z=</p>
+                <input id="Zknapp" name="Zinput" type="number" value="0">
+            </div>
+        </div>
+        
+        <div id = "knappar">
+            <div class="funksjonKnappar">
+                <button class="knapp funKnapp talKnapp">C</button>
+                <button class="knapp funKnapp talKnapp">CE</button>
+                <button class="knapp funKnapp talKnapp">CB</button>
+                <button class="knapp funKnapp talKnapp radKnapp active" id="radKnapp">RAD</button>
+                <button class="knapp funKnapp talKnapp radKnapp" id="graKnapp">GRA</button>
+            </div>
+            
+            <div class="talKnappar">
+                <button class="knapp talKnapp"><p class="inline">1</p></button>
+                <button class="knapp talKnapp"><p class="inline">2</p></button>
+                <button class="knapp talKnapp"><p class="inline">3</p></button>
+                <button class="knapp talKnapp"><p class="inline">4</p></button>
+                <button class="knapp talKnapp"><p class="inline">5</p></button>
+                <button class="knapp talKnapp"><p class="inline">6</p></button>
+                <button class="knapp talKnapp"><p class="inline">7</p></button>
+                <button class="knapp talKnapp"><p class="inline">8</p></button>
+                <button class="knapp talKnapp"><p class="inline">9</p></button>
+                <button class="knapp talKnapp"><p class="inline">0</p></button>
+                <button class="knapp talKnapp hex"><p class="inline">a</p></button>
+                <button class="knapp talKnapp hex"><p class="inline">b</p></button>
+                <button class="knapp talKnapp hex"><p class="inline">c</p></button>
+                <button class="knapp talKnapp hex"><p class="inline">d</p></button>
+                <button class="knapp talKnapp hex"><p class="inline">e</p></button>
+                <button class="knapp talKnapp hex"><p class="inline">f</p></button>
+            </div>
+
+            <div class="aritmatikkKnappar">
+                <button class="knapp talKnapp" id="erLik"><p class="inline">=</p></button>
+                <button class="knapp talKnapp"><p class="inline">+</p></button>
+                <button class="knapp talKnapp"><p class="inline">*</p></button>
+                <button class="knapp talKnapp"><p class="inline">.</p></button>
+                <button class="knapp talKnapp"><p class="inline">/</p></button>
+                <button class="knapp talKnapp"><p class="inline">(</p></button>
+                <button class="knapp talKnapp"><p class="inline">)</p></button>
+                <button class="knapp talKnapp"><p class="inline">^</p></button>
+                <button class="knapp talKnapp"><p class="inline">^2</p></button>
+                <button class="knapp talKnapp"><p class="inline">sin</p></button>
+                <button class="knapp talKnapp"><p class="inline">cos</p></button>
+                <button class="knapp talKnapp"><p class="inline">0x</p></button>
+                <button class="knapp talKnapp"><p class="inline">0b</p></button>
+            </div>
+
+        <script>
+
+            var x,y,z = 0;
+            var rad = false;
+            var promptListe = [];
+            function getVarVal(){
+                x = document.getElementById('Xknapp').value;
+                y = document.getElementById('Yknapp').value;
+                z = document.getElementById('Zknapp').value;
+            }
+            function sin(inp){
+                return Math.sin(inp);
+            }
+            function cos(inp){
+                return Math.cos(inp);
+            }
+            function appendTextToElement(event){
+
+                const buttonText = event.target.textContent;
+                var outputElement = document.getElementById('tekstfelt');
+                if(buttonText == 'C' || buttonText == 'CE'){
+                    outputElement.value = '';
+                }else if(buttonText == 'RAD' || buttonText == 'GRA'){
+                        rad = true;
+                        var radKnappar = document.getElementsByClassName('radKnapp');
+                        radKnappar[0].classList.toggle('active');
+                        radKnappar[1].classList.toggle('active');
+                        console.log(radKnappar[0].innerHTML);
+                }else if(buttonText == '^'){
+                    outputElement.value += '^'
+
+                }else if(buttonText == 'sin'){
+                    outputElement.value = 'sin(' + outputElement.value + ')';
+                }else if(buttonText == 'cos'){
+                    outputElement.value = 'cos(' + outputElement.value + ')';
+                }else if(buttonText == 'CB'){
+                    //slett siste element
+                    outputElement.value = outputElement.value.substring(0, outputElement.value.length - 1);
+                }else if(buttonText =='='){
+                    getVarVal();
+                    let prompt = document.getElementById('tekstfelt').value;
+                    prompt = prompt.replace("^","**");
+                    console.log(prompt);
+                    document.getElementById('tekstfelt').value = eval(prompt);
+                }else{
+                    outputElement.value += buttonText;
+                }
+            }
+            const buttons = document.querySelectorAll('.knapp');
+            buttons.forEach(button => {
+                button.addEventListener('click', appendTextToElement);
+            });
+        </script>
+    </article>
+</body>
+</html>
