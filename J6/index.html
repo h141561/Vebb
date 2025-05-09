@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Oppg 3</h1>
+    <button id="klkkeKnapp" onclick="klikkTell()">Klikk meg!!</button>
+    <div>Du har klikka: <span id="klikk">0</span> gongar!</div>
+
+    <script>
+        var klikk = 0;
+        function klikkTell(){
+            document.getElementById("klikk").innerText = ++klikk;
+        }
+    </script>
+
+    <h1>Oppg 2</h1>
+    <input type="text" name="" id="inpFelt">
+    <button onclick="leggTilTing()"> Legg til</button>
+    <textarea type="texte" id="outpFelt" inputmode="" disabled style="height: 200px;"></textarea>
+    
+
+    <script>
+        let tellar2 = 0;
+        function leggTilTing(){
+            const vare = document.getElementById("inpFelt").value;
+            if(vare == "")
+                return;
+            const vareStreng = ++tellar2 + "- " + vare + '\n';
+            
+            let outp = document.getElementById("outpFelt");
+            outp.disabled = false;
+            outp.value += vareStreng;
+            outp.disabled = true;
+            
+            
+        }
+    </script>
+
+    <h1>Oppg 1</h1>
+    <input type="text" placeholder="Skriv in vare" id="vareFelt">
+    <button id="leggTilKnapp" onclick="leggTilVare()">Lett til Vare</button>
+    <div id="vareListe"></div>
+
+
+    <script>
+        var tellar = 1;
+        function leggTilVare(){
+            const vare = document.getElementById("vareFelt").value;
+            if (vare == "")
+                return;
+            const vareStreng = tellar++ + " " + vare;
+            document.getElementById("vareFelt").value = "";
+            console.log(vareStreng);
+            let nyttElement = document.createElement("p");
+            nyttElement.innerHTML = vareStreng;
+            document.getElementById("vareListe").appendChild(nyttElement);
+        }
+    </script>
+</body>
+</html>
