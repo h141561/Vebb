@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(255,255,255));
+        }
+        #handleListe{
+            
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            min-width: 400px;
+            height: 480px;
+            margin: 0 auto;
+            background: #f4e64d;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3);
+            overflow: hidden;
+        }
+        #handleListe:before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 60px;
+            background: radial-gradient(#000000 6px, transparent 7px) repeat-y;
+            background-size: 30px 30px;
+            border-right: 3px solid #D44147;
+            box-sizing: border-box;
+        }
+        .textArea {
+            position: absolute;
+            top: 40px; right: 0; bottom: 30px; left: 60px;
+            background: linear-gradient(transparent, transparent 28px, #00000069 28px);
+            background-size: 30px 30px;
+        }
+
+        .textArea p {
+            width: 100%;
+            max-width: 100%;
+            height: 14px;
+            max-height: 100%;
+            
+            padding: 0 10px;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            color: rgba(0, 0, 0, 0.558);
+            font-family: 'Handlee', cursive;
+            font-weight: bold;
+            font-size: 18px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body id="kropp">
+    <h1> Oppg 8 </h1>
+        <input type="number" name="" id="pengeMengd" min="0" value="" placeholder="Skriv in pengar">
+        <select name="" id="val">
+            <option value="USD">Dollar</option>
+            <option value="EUR">Euro</option>
+            <option value="DKK">Dankse Kroner</option>
+            <option value="ISK">Islandske kroner</option>
+            <option value="SEK">Svenske kroner</option>
+            <option value="GBP">Britiske pund</option>
+        </select>
+        <button id="rekn" onclick="rekneFunksjon()" >Rekn ut</button>
+        <div id="valuta"></div>
+
+        <script>
+            function rekneFunksjon(){
+                const valuta = document.getElementById("val").value;
+                const pengestreng = document.getElementById("val");
+                const pengar = document.getElementById("pengeMengd").value;
+                let utskriftsDiv = document.getElementById("valuta");
+                let kronemengde = 0;
+                console.table(document.getElementById("val"));
+                console.table(valuta);
+                switch(valuta){
+                    case "USD":
+                        kronemengde = pengar * 10.41;
+                        break;
+                    case "EUR":
+                        kronemengde = pengar * 11.7;
+                        break;
+                    case "DKK":
+                        kronemengde = pengar * 1.5667;
+                        break;
+                    case "ISK":
+                        kronemengde = pengar * 0.08;
+                        break;
+                    case "SEK":
+                        kronemengde = pengar * 1.07;
+                        break;
+                    case "GBP":
+                        kronemengde = pengar * 13.78;
+
+                }
+                kronemengde = kronemengde.toFixed(2);
+                utskriftsDiv.innerHTML = `${pengar} ${valuta} er ${kronemengde} kroner`;
+                
+            }
+
+        </script>
+    </h1>
+    <h1>Oppg 7</h1>
+    <input type="number" name="lon" id="timeLonn" value="" placeholder="løn">
+    <input type="number" name="timar" id="timar" placeholder="timar">
+    <button onclick="lonRekn()">Rekn ut</button>
+    <div id="skjult"></div>
+
+    <script>
+        function lonRekn(){
+            const lon = document.getElementById("timeLonn").value;
+            const timar = document.getElementById("timar").value;
+
+            if(Number(lon) < 0 || Number(timar) <0 ){
+                document.getElementById("skjult").innerText = "kan ikkje rekne med negative tal;"
+            }else{
+
+                document.getElementById("skjult").innerText =
+                "Du har tjent " +
+                 Number(lon) * Number(timar ) +
+                 " kr På " +
+                 timar +
+                 " timar ";
+            }
+        }
+    </script>
+    <h1>Oppg 6</h1>
+
+    <input type="number" name="kar" id="" min="1" max="6" value=""><br> 
+    <input type="number" name="kar" id="" min="1" max="6" value=""><br> 
+    <input type="number" name="kar" id="" min="1" max="6" value=""><br> 
+    <input type="number" name="kar" id="" min="1" max="6" value=""><br> 
+    <input type="number" name="kar" id="" min="1" max="6" value=""><br> 
+    <input type="number" name="kar" id="" min="1" max="6" value=""><br> 
+    <button onclick="karakterar()">rekn ut</button>
+
+    <script>
+        function karakterar(){
+            let arr = document.getElementsByName("kar");
+            
+            let gjennom = 0;
+            let tot = 0;
+
+            for(let i = 0; i <arr.length; i++){
+                if(arr[i].value == "")
+                    continue;
+                else{
+                    gjennom += Number(arr[i].value);
+                    tot++;
+                }
+            }
+            console.log(gjennom/tot);
+        }
+    </script>
+
+    <h1>Oppg 5</h1>
+    <input type="checkbox" onclick="leggTil('Mjølk')" name="mjolk" id="" class="varer">mjolk<br>
+    <input type="checkbox" onclick="leggTil('Smør')" name="margarin" id="" class="varer">Smør<br>
+    <input type="checkbox" onclick="leggTil('Pote')" name="potet" id="" class="varer">Poter<br>
+    <input type="checkbox" onclick="leggTil('Egg')" name="egg" id="" class="varer">Egg
+    <div id="handleListe">
+        <div id="oppForingar" class="textArea">
+            <p>mjølk</p>
+            <p>egg</p>
+            <p>smør</p>
+            <p>Brød</p>
+            <p>Pasta</p>
+        </div>
+    </div>
+
+    <script>
+        function leggTil(sjolv){
+            console.log(sjolv);
+            let oppFor = document.getElementById("oppForingar");
+            let nyP = document.createElement("p");
+            nyP.innerHTML = sjolv;
+            oppFor.appendChild(nyP);
+
+        }
+    </script>
+
+    <h1>Oppg 4</h1>
+
+    <input type="range" name="" id="raud" value="0" min="0" max="255" onchange="fargelegg()">
+    <input type="range" name="" id="gron" value="0" min="0" max="255" onchange="fargelegg()">
+    <input type="range" name="" id="blaa" value="0" min="0" max="255" onchange="fargelegg()">
+
+    <script>
+        function fargelegg(){
+            const red = document.getElementById("raud").value;
+            const green = document.getElementById("gron").value;
+            const blaa = document.getElementById("blaa").value;
+            const farge = "rgb(" + red + ',' + green + ',' + blaa + ");";
+            let kropp = document.getElementById("kropp");
+            console.log(farge);
+            kropp.style.cssText = "background-color:" +  farge ;
+        }
+    </script>
+    
+    <h1>Oppg 2</h1>
+
+    <input type="number" name="" id="lval">
+    <select name="" id="op">
+        <option value="/">/</option>
+        <option value="*">*</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+    </select>
+    <input type="number" name="" id="rval">
+    <button onclick="rekn()">=</button>
+    <div id="2resultat"></div>
+
+    <script>
+        function rekn(){
+            let op = document.getElementById("op").value;
+            const lval = document.getElementById("lval").value;
+            const rval = document.getElementById("rval").value;
+            console.log(lval + " " + op + " " + rval);
+            document.getElementById("2resultat").textContent = eval(`${lval} ${op} ${rval}`)
+        }
+    </script>
+
+
+
+    <h1>Oppg 1</h1>
+    <input type="text" name="" id="1Namn"><button onclick="visNamn()"></button>
+    <div id="skjult"></div>
+    <script>
+        function visNamn(){
+            const streng = document.getElementById("1Namn").value;
+            document.getElementById("skjult").textContent = "Hei " + streng;
+        }
+    </script>
+</body>
+</html>

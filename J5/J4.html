@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fail{
+            background-color: red;
+            color: white;
+            padding: 1em;
+        }
+        .success{
+            background-color: green;
+            color: white;
+            padding: 1em;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="" id="usr">
+    <input type="password" name="" id="passwd">
+    <button id="enter" onclick="logIn()">logg in</button>
+    <div id="respons"></div>
+
+    <script>
+        const brukarNamn = "ola";
+        const passOrd = "Stimorol08";
+
+        function logIn(){
+            let usr = document.getElementById("usr").value;
+            let passwd = document.getElementById("passwd").value;
+
+            if(brukarNamn == usr && passOrd == passwd){
+                document.getElementById("respons").innerHTML = "Du er logga in som " + usr;
+                document.getElementById("respons").classList.add("success");
+                document.getElementById("respons").classList.remove("fail");
+            }else{
+                document.getElementById("respons").innerHTML = "Brukarnamn eller passord er feil";
+                document.getElementById("respons").classList.remove("success");
+                document.getElementById("respons").classList.add("fail");
+            }
+        }
+    </script>
+</body>
+</html>

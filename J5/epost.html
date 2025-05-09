@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Fornamn</td>
+            <td><input type="text" id="fornamn"></td>
+        </tr>
+        <tr>
+            <td>mellomnamn(valfritt)</td>
+            <td><input type="text" id="mellomnamn"></td>
+        </tr>
+        <tr>
+            <td>etternamn</td>
+            <td><input type="text" id="etternamn"></td>
+        </tr>        <tr>
+            <td><button onclick="epostGen()">lag epost</button></td>
+            <td id="resultat"></td>
+        </tr>
+    </table>
+
+    <script>
+    function epostGen(){
+        const fornamn = document.getElementById("fornamn").value;
+        const mellomnamn = document.getElementById("mellomnamn").value;
+        const etternamn = document.getElementById("etternamn").value;
+        
+        let adresse = "";
+
+        adresse += fornamn.slice(0,3);
+        if(mellomnamn){
+            adresse += '.';
+            adresse += mellomnamn.slice(0,3);
+            adresse += '.'
+            adresse += etternamn;
+        }else{
+            adresse = fornamn + '-' + etternamn.slice(0,2);
+        }
+
+        
+        adresse += "@alf.no";
+        document.getElementById("resultat").innerText = adresse;
+    }
+    </script>
+</body>
+</html>

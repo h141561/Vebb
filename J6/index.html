@@ -4,9 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        html{
+            --tekst-farge: #000000;
+        }
+        *{
+            color: var(--tekst-farge);
+        }
+        .stor{
+            font-size: 1000%;
+        }
+        .skjult{
+            visibility: hidden;
+        }
+    </style>
 </head>
 <body>
 
+    <h1>Oppg 4</h1>
+
+    <h2>H2</h2>
+
+    <div>Div med eit "<span>span</span>" i midten</div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, rem!</p>
+
+    <button onclick="spanStor()" id="spanKnapp">STORE SPAN</button>
+    <br>
+    <input type="color" name="" id="fargeVelgar">
+    <button onclick="setFarge()">farg tekst</button>
+    <br>
+    <button onclick="skjulOverskrifter()">Skjul oppgåver</button>
+
+    <script>
+
+        function skjulOverskrifter(){
+            let overskrifter = document.getElementsByTagName("h1");
+            for(let i = 0; i < overskrifter.length; i++){
+                overskrifter[i].classList.toggle("skjult");
+            }
+
+        }
+        const storKnapp = "STORE SPAN"
+        const litenKnapp = "liten span";
+        function setFarge(){
+            let farge = document.getElementById("fargeVelgar").value;
+            console.log(farge);
+            document.documentElement.style.setProperty("--tekst-farge", farge);
+
+        }
+
+        function spanStor(){
+
+            let knappen = document.getElementById("spanKnapp");
+            knappen.innerText = storKnapp;
+            let spans = document.getElementsByTagName("span");
+            for(let i = 0; i < spans.length; i++){
+                spans[i].classList.toggle("stor");
+            }
+            if(knappen.innerText == litenKnapp)
+                knappen.innerText = storKnapp;
+            else
+                knappen.innerText = litenKnapp;
+                    
+        }
+    </script>
+    
     <h1>Oppg 3</h1>
     <button id="klkkeKnapp" onclick="klikkTell()">Klikk meg!!</button>
     <div>Du har klikka: <span id="klikk">0</span> gongar!</div>
@@ -19,7 +81,7 @@
     </script>
 
     <h1>Oppg 2</h1>
-    <input type="text" name="" id="inpFelt">
+    <input type="text" name="" id="inpFelt" onsubmit="leggTilTing()">
     <button onclick="leggTilTing()"> Legg til</button>
     <textarea type="texte" id="outpFelt" inputmode="" disabled style="height: 200px;"></textarea>
     

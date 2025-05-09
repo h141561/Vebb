@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <title>Oppsummeringsøvelse</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    label { display: block; margin-top: 10px; }
+    #summary { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+
+  <h1>Skjema for oppsummering</h1>
+
+  <label>
+    Navn:
+    <input type="text" id="navn" />
+  </label>
+
+  <label>
+    Alder:
+    <input type="number" id="alder" />
+  </label>
+
+  <label>
+    E-post:
+    <input type="email" id="epost" />
+  </label>
+
+  <label>
+    Fødselsdato:
+    <input type="date" id="fodsel" />
+  </label>
+
+  <label>
+    Favorittfarge:
+    <input type="color" id="farge" />
+  </label>
+
+  <label>
+    Hvor fornøyd er du med denne siden? (0-10)
+    <input type="range" id="fornoyd" min="0" max="10" />
+  </label>
+
+  <label>
+    Hobby: (velg én)
+    <select id="hobby">
+      <option value="Fotball">Fotball</option>
+      <option value="Gaming">Gaming</option>
+      <option value="Lesing">Lesing</option>
+      <option value="Annet">Annet</option>
+    </select>
+  </label>
+
+  <label>
+    Velg land:
+    <select id="land">
+      <option value="Norge">Norge</option>
+      <option value="Sverige">Sverige</option>
+      <option value="Danmark">Danmark</option>
+    </select>
+  </label>
+
+  <label>
+    Skriv litt om deg selv:
+    <textarea id="beskrivelse"></textarea>
+  </label>
+
+  <p id="info">Dette er et test-HTML-dokument som viser forskjellige input-elementer.</p>
+
+  <button onclick="visOppsummering()">Vis oppsummering</button>
+
+  <div id="summary"></div>
+
+  <script src="index.js">
+     
+  </script>
+
+</body>
+</html>
