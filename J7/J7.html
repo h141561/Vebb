@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .skjult{
+            visibility: hidden;
+        }
+        label{
+            display: inline;
+            margin: 1em;
+        }
+        input{
+            margin: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Oppg 4 - pizzavelgar
+    </h1>
+        <h3>Fyll</h3>
+        <input type="radio" name="fyll" id="" value="Tako" checked>Tako
+        <input type="radio" name="fyll" id="kebab" value="kebab">Kebab
+        <input type="radio" name="fyll" id="" value="trøffel">Trøffel;
+        <br><h3>storleik</h3>
+        <input type="radio" name="storleik" id="store" value="store" checked>Stor
+        <input type="radio" name="storleik'" id="liten" value="liten">Liten
+        <br>
+        
+        <button onclick="pizzaBestill()">Bestill</button>
+
+        <script>
+            function pizzaBestill(){
+                let fylltypar = document.getElementsByName("fyll");
+                let storleikar = document.getElementsByName("storleik");
+                let fyll = null;
+                let storleik = null;
+                
+                for(let  i = 0 ;  i < fylltypar.length ; i++){
+                    console.log(fylltypar[i]);
+                    if(fylltypar[i].checked)
+                    fyll = fylltypar[i].value;
+                }
+                 for(let  i = 0 ;  i < storleikar.length ; i++){
+                    console.log(storleikar[i]);
+                    if(storleikar[i].checked)
+                    storleik = storleikar[i].value;
+                }
+
+                console.log("Din " + storleik +" " + fyll+"Pizza er klar om 59 minutt");
+            }
+        </script>
+
+    <h1>Oppg 3 - Ferjeturar</h1>
+
+    <input name="born" id="born" type="number" min="0">
+        <label for="born">Born</label><br>
+    <input name="vaksne" id="vaksne" type="number" min="0">
+        <label for="vaksne">Vaksne</label><br>
+    <input name="Honnør" id="honn" type="number" min="0">
+        <label for="honnør">Honnørar</label><br>
+
+    <input value="tur" type="radio" name="tur" id="tur" checked>tur
+    <input value="trt" type="radio" name="tur" id="retur">tur/retur
+    <br>
+    <button onclick="bestill()">Bestill</button>
+
+    <div id="bilettInfo"></div>
+
+    <script>
+        function bestill(){
+            let antVaksne = document.getElementById("vaksne").value;
+            let antBorn = document.getElementById("born").value
+            let antHonn = document.getElementById("honn").value;
+            let bilettStreng = "tur"
+            let tur = document.getElementById("tur").checked;
+            let totPris = (antVaksne * 100 + antHonn * 60 + antBorn * 50);
+            if(!tur){
+                totPris *= 0.75;
+                bilettStreng = "tur/retur";
+            }
+
+            let streng = `Bilettprisen for ${antVaksne} vaksne, ${antHonn} honnørar og ${antBorn} born blir : ${totPris} kr for ${Number(antVaksne)+Number(antHonn)+Number(antBorn)} ${bilettStreng}-bilett(ar)`;
+            console.log(tur);
+
+            document.getElementById("bilettInfo").innerText = streng;
+
+
+        }
+    </script>
+
+    <h1>Oppg 2 - Gjett tal Leik</h1>
+
+    <input type="number" id="inFelt" placeholder="skriv in eit tal">
+    <button onclick="oppg2();">Gjiss!!</button>
+    <div id="outFelt"></div>
+    <div id="tellar" class="skjult">Du har klikka: <span id="klikk">0</span> gongar!</div>
+    <script>
+        let svar  = 42; 
+        let tellar = 0;
+        let gongar  = 10;
+        function oppg2(){
+            document.getElementById("tellar").classList.remove("skjult");
+            document.getElementById("klikk").innerText = ++tellar;
+
+            let gjiss = document.getElementById("inFelt").value;
+
+            let retStreng = "Du har gjissa : " + gjiss + " Det er ";
+
+            if(gjiss == svar){
+                retStreng += "Riktig!!! Gratulerar ";
+                retStreng += " du klarte det  på " + tellar + " forsøk";
+                document.getElementById("outFelt").innerText = retStreng;
+                return;
+                
+            }else if(gjiss > svar){
+                retStreng += "for høgt";
+            }else if(gjiss < svar){
+                retStreng += "for lavt";
+            }
+
+            retStreng += " du har " + --gongar + " forsøk igjen";
+
+            document.getElementById("outFelt").innerText = retStreng;
+        }
+    </script>
+
+    <h1>Oppg 1 - Historiegenerator</h1>
+
+    <input type="text" id="Hnamn" placeholder="Skriv in fornamn"><br>
+    <select name="Kjønn" id="kjonnSelect" placeholder="Velg Kjønn"> 
+        <option value="disabled" disabled selected hidden>Velg Kjønn</option>
+        <option value="Ukjent">andre</option>
+        <option value="Mann">Mann</option>
+        <option value="Kvinne">Kvinne</option>
+        <option value="Jente">jente</option>
+        <option value="Gut">Gut</option>
+    </select>
+    <input type="number" name="alderSel" id="alderSel" placeholder="Skriv in alder">
+    
+    <button onclick="genererHistorie()">Lag Historie</button>
+
+    <script>
+        function genererHistorie(){
+            let namn = document.getElementById("Hnamn").value;
+            let kjonn = document.getElementById("kjonnSelect").value;
+            let pronomen = "Han";
+            let artikkel = "ein"
+
+            if(kjonn == "Kvinne"|| kjonn == "Jente"){
+                pronomen = "Ho";
+                artikkel = "ei"
+            }
+            else if(kjonn == "Ukjent" || kjonn == "andre"){
+                pronomen = "Hen";
+                artikkel = "nokon"
+            }
+
+            let alder = document.getElementById("alderSel").value;
+            let dato = new Date();
+            console.log(dato.getFullYear());
+
+            let outpStr = `Det var ein gong ${artikkel} som heitte ${namn} som var fødd i år ${alder}.${pronomen} er dermed ${dato.getFullYear()-alder} år gammal og har ${100 - (dato.getFullYear()-alder)} år igjen til 100-årsdagen sin!!`;
+            
+            console.log(outpStr);
+
+            
+        }
+    </script>
+
+</body>
+</html>
