@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Oppg 1 - 3, Odds  </h1>
+
+    <input type="text" name="" id="gjiss">
+    <button onclick="oddsCase()">Gjiss</button>
+    <div id="svar"></div>
+
+    <script>
+        function odds(){
+            let streng = document.getElementById("gjiss").value;
+            let output  = "ukjent";
+            if(streng == 'u' || streng == 'U'){
+                output = "Uavgjort";
+            }else if(streng == 'B' || streng == 'b'){
+                output = "Borte"
+            }else if(streng == 'H' || streng == 'h'){
+                output = "Heime";
+            }else{
+                output = "ugyldig input "
+            }
+
+            document.getElementById("svar").innerText = `Du svarte \"${streng}\" som er ${output}`;
+
+        }
+        function oddsCase(){
+            let streng = document.getElementById("gjiss").value;
+            let output  = "ukjent";
+
+            switch(streng){
+                case 'h':
+                case 'H':
+                    output = "Heime";
+                    break;
+                case 'b':
+                case 'B':
+                    output = "Borte";
+                    break;
+                case 'u':
+                case 'U':
+                    output = "Uuavgjort";
+                    break;
+                default:
+                    output = "Ugyldig output";
+            }
+
+            document.getElementById("svar").innerText = `Du svarte \"${streng}\" som er ${output}`;
+        }
+    </script>
+
+
+
+    <h1>Oppg 4 - KMI-kalkulator </h1>
+
+    <input type="number" id="hogde" placeholder="Skriv in høgde i cm eller m">
+    <input type="number" id="vekt" placeholder="Skriv in vekt">
+    <br>
+    <button onclick="KMIKALK()">Rekn ut</button>
+    <br>
+    <div id="KMIresultat"></div>
+
+    <script>
+        function KMIKALK(){
+            let hogde = Number(document.getElementById("hogde").value);
+            console.log("Høgde er : " + hogde);
+            //vi må ha høgda i cm, vist talet vi fekk er større enn 3 kan vi rekne med vi har fått det i cm, vist ikkje gongar vi det med 100
+            if(hogde > 3)
+                hogde /= 100;
+            console.log("Høgde er : " + hogde);
+            //hogde er no i cm
+            let vekt = document.getElementById("vekt").value;
+
+            let KMI = Number(vekt) / (Number(hogde) ** 2);
+            
+            KMI = Math.round(KMI * 100);
+            KMI /= 100;
+            console.log("KMI er " + KMI);
+            document.getElementById("KMIresultat").innerText = `Du har ein KMI på ${KMI}, noko som tilsvarar ${KMITilTekst(KMI)}`;
+        }
+        function KMITilTekst(kmi){
+            kmi = Math.round(Number(kmi));
+            if(kmi < 18){return "alvorleg undervekt";
+            } else if( kmi < 25){
+                return "Normalvakt";
+            } else if(kmi < 35){
+                return "overvekt"
+            }else if(kmi > 35){
+                return "fedme";
+            }else{
+                return "Ukjent"
+            }
+            
+        }
+    </script>
+
+
+    <h1>Oppg 5 - månadsveljar</h1>
+    
+    <input type="text" name="" id="innDato">
+    <button onclick="reknDato()">skriv in dato</button>
+    <div id="datoUt"></div>
+
+    <script>
+        function reknDato(){
+            let inStreng = document.getElementById("innDato").value;
+            let dag = inStreng.slice(0,inStreng.indexOf('-'));
+            let maanad = inStreng.slice(inStreng.indexOf('-') + 1, inStreng.length);
+            console.log(dag);
+            console.log(maanad);
+            let datoUt = document.getElementById("datoUt");
+            
+            if(dag < 1 || dag > 33){
+                datoUt.innerText = `${dag} er ikkje mellom 1 og 32, dermed ikkje er ein gyldig dag`;
+                return;
+            }
+            if(maanad < 1 || maanad > 12){
+                datoUt.innerText = `${maanad} er ikkje mellom 1 og 12, og er dermed ikkje ein gyldig maanad`;
+                return;
+            }
+            let mStreng  = talTilMaanad(Number(maanad));
+            datoUt.innerText = `du har skrevet in den ${dag} i den ${maanad}månaden som er ${mStreng}`;
+
+            
+        }
+        function talTilMaanad( tal ){
+            switch (tal){
+                case 1:
+                    return "Januar";
+                    break;
+                case 2:
+                    return "Februar";
+                case 3:
+                    return "Mars";
+                case 4:
+                    return "April";
+                case 5:
+                    return "Mai";
+                case 6:
+                    return "Juni";
+                case 7:
+                    return "Juli";
+                case 8:
+                    return "August";
+                case 9: return "September";
+                case 10: return "Oktober";
+                case 11: return "November";
+                case 12: return "Desember";
+                default: return "Ugyldig månad";
+            }
+            return "alt har gått veldig veldig gale";
+        }
+    </script>
+
+    <h1>Oppg 6 - skotår</h1>
+
+    <input type="text" min="0" id="arrIn" placeholder="skriv in år">
+    <button onclick="reknSkotAar()">Rekn ut om skuddår</button>
+    <div id="skotAarOut"></div>
+
+    <script>
+        function reknSkotAar(){
+            let aar = document.getElementById("arrIn").value;
+            let erSkotAar = false;
+            let outFelt = document.getElementById("skotAarOut");
+
+            if(aar % 1 != 0){
+                outFelt.innerText = `${aar} er ikkje eit heiltal og dermed ikkje eit gyldig år`;
+                return;
+            }
+
+            if((aar % 4 == 0 && aar % 100 != 0) || aar % 400 == 0){
+                erSkotAar = true;
+            }
+            
+
+            if(erSkotAar){
+                outFelt.innerText = `${aar} er eit skotår`;
+            }else{
+                outFelt.innerText = `${aar} er ikkje eit skotår`;
+            }
+        }
+    </script>
+
+</body>
+</html>
