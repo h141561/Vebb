@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #boksar{
+            display: flex;
+            flex-wrap: wrap;
+            
+            
+        }
+        .boks{
+            height: 40px;
+            width:  40px;
+            margin: 10px;
+            background-color: wheat;
+            border: 1px black solid;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Oppg 4 - kalkulator for reknestykker</h1>
+
+    <input type="number" name="" id="lval">
+    <select name="operator" id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="number" name="" id="rval">
+    <button onclick="rekn()">=</button>
+
+    <div id="stykker"></div>
+
+    <script>
+        function rekn(){
+            let lval = document.getElementById("lval").value;
+            let op = document.getElementById("operator").value;
+            let rval = document.getElementById("rval").value;
+
+            let nyttElem = document.createElement("p");
+            nyttElem.innerText = gjestreng(lval, rval, op);
+            document.getElementById("stykker").prepend(nyttElem);
+        }
+
+        function gjestreng(lval, rval, op){
+            lval = Number(lval);
+            rval = Number(rval);
+            switch(op){
+                case '+':
+                    return `${lval} pluss ${rval} er ${lval + rval}`;
+                case '-':
+                    return `${lval} minu ${rval} er ${lval - rval}`;
+                case '*':
+                    return `${lval} gonger ${rval} er ${lval * rval}`;
+                case '/':
+                    return `${lval} dele på ${rval} er ${lval / rval}`;
+            }
+        }
+    </script>
+
+    <h1>Oppg 3 - fargeBoksar</h1>
+
+    <input type="color" name="" id="fargeveljar">
+    <button onclick="lagBoks()">Slå in farge</button>
+    <div id="boksar">
+        <div class="boks"></div>
+    </div>
+
+    <script>
+        function lagBoks(){
+            let nyBoks = document.createElement("div");
+            nyBoks.classList.add("boks");
+            nyBoks.style.backgroundColor = document.getElementById("fargeveljar").value;
+            document.getElementById("boksar").prepend(nyBoks)
+            
+        }
+    </script>
+
+    <h1>Oppg 2 - textarea</h1>
+
+    <button onclick="kommenter()">kommenter</button><br>
+
+    <textarea name="" id="kommentarFelt"></textarea>
+
+    <ul id="kommentarar"></ul>
+
+    <script>
+        function kommenter(){
+            let streng = document.getElementById("kommentarFelt").value;
+            document.getElementById("kommentarFelt").value = "";
+            console.log(streng);
+            let nyttElem = document.createElement("li");
+            nyttElem.innerHTML = streng;
+            document.getElementById("kommentarar").appendChild(nyttElem);
+
+        }
+    </script>
+
+
+    <h1>Oppg 1 - knapp og liste</h1>
+    <button onclick="appendRand()">lett til tilfeldig tal</button>
+    <ul id="appListe"></ul>
+
+    
+
+    <script>
+        function appendRand(){
+            let nyttal = Math.floor(Math.random() * 100);
+            console.log(nyttal);
+            let nyttElem = document.createElement("li");
+            nyttElem.innerHTML = nyttal;
+            document.getElementById("appListe").appendChild( nyttElem);
+        }
+    </script>
+</body>
+</html>

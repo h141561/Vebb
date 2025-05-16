@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td, th{
+            border: 1px black solid;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Oppg 6</h1>
+    <table id="andeTabell">
+
+    </table>
+    <button onclick="tabellBygg()">legg til innbyggarar</button>
+
+    <script>
+        function tabellBygg(){
+            let streng = "<tr><th>PersonNr</th><th>Innbyggar</th></tr>";
+            for(let i = 0; i < personer.length; i++){
+                streng += `<tr><td>${i}</td><td>${personer[i]}</td></tr>`;
+            }
+            
+            console.log(streng);
+            document.getElementById("andeTabell").innerHTML = streng;
+
+        }
+    </script>
+
+    <h1>Oppg 5</h1>
+    <div id="innbyggarar"></div>
+    <button onclick="andeBygg()">legg til innbyggarar</button>
+
+    <script>
+        let personer = ["Ole", "Dole", "Doffen", "Donald", "Dolly"];
+        function andeBygg(){
+            let streng = "<ol>";
+            for(let i = 0; i < personer.length; i++){
+                streng += `<li>${personer[i]}</li>\n`;
+            }
+            streng += "<ol>";
+            console.log(streng);
+            document.getElementById("innbyggarar").innerHTML = streng;
+
+        }
+    </script>
+
+    <h1>Oppg 4 </h1>
+        <input type="number" name="" id="innTal">
+        <button onclick="leggTilGjennomsnitt()">legg til</button><br>
+        <div id="gjennomsnitt"></div><br>
+        <ol id="talListe">
+            
+        </ol>
+
+        <script>
+            let talListe = new Array();
+            let gjennomsnitt = 0;
+            let tellar = 0;
+            function leggTilGjennomsnitt(){
+                
+                let talet =  document.getElementById("innTal").value;
+                talListe[tellar++] = Number(talet);
+                //console.log(talet);
+                let sum = 0;
+                for(let i = 0; i < tellar; i++){
+                    sum += talListe[i];
+                    console.log(talListe[i]);
+                }
+                gjennomsnitt = sum / tellar;
+
+                document.getElementById("gjennomsnitt").innerText = "gjennomsnittet av alle "+ tellar + " er " + gjennomsnitt.toFixed(2);
+                document.getElementById("innTal").value = "";
+
+                let nyttal = document.createElement("li");
+
+                document.getElementById("talListe").innerHTML += `<li>${talet}</li>`;
+
+            }
+        </script>
+
+
+
+    <h1>Oppg 3 - dagar  i Månad</h1>
+        <input type="date" name="" id="maanadsVeljar" onchange="skrivMaanad()"><br>
+        <div id="antalDagar"></div>
+
+        <script>
+            function skrivMaanad(){
+                dato = document.getElementById("maanadsVeljar").value;
+                //får månaden med å skjære strengen dumt
+                let maanad = dato.slice(5,7);
+                
+                let streng = `i ${talTilMaanad(maanad)} er det ${talTilMnd(maanad)} dagar `;
+                document.getElementById("antalDagar").innerText = streng;
+            }
+
+            function talTilMnd(x){
+                x = Number(x);
+                if(x == 2){
+                    let aar = (document.getElementById("maanadsVeljar").value.slice(0, 4));
+                    console.log("år er " + aar);
+                    if((aar % 4 == 0 && aar % 100 != 0) || aar % 400 == 0)
+                        return 29;
+                    else
+                        return 28;
+                }
+                let mnd = talTilMaanad(x);
+                switch(mnd){
+                    case "Januar":
+                    case "Mars":
+                    case "Mai":
+                    case "Juli":
+                    case "August":
+                    case "Oktober":
+                    case "Desember":
+                        return 31;
+                    default:
+                        return 30;
+                    
+                }
+            }
+            function talTilMaanad( tal ){
+                tal = Number(tal);
+                switch (tal){
+                    case 1:
+                        return "Januar";
+                        break;
+                    case 2:
+                        return "Februar";
+                    case 3:
+                        return "Mars";
+                    case 4:
+                        return "April";
+                    case 5:
+                        return "Mai";
+                    case 6:
+                        return "Juni";
+                    case 7:
+                        return "Juli";
+                    case 8:
+                        return "August";
+                    case 9: return "September";
+                    case 10: return "Oktober";
+                    case 11: return "November";
+                    case 12: return "Desember";
+                    default: return "Ugyldig månad";
+                }
+                return "alt har gått veldig veldig gale";
+            }
+        </script>
+
+
+    
+
+    <h1>Oppg 2 - </h1>    
+        <input type="number" name="" id="tal1">
+        <input type="number" name="" id="tal2">
+        <button onclick="finnStyrste()">rekn</button>
+        <div id="storst"></div>
+
+        <script>
+            function finnStyrste(){
+                let tal1 = document.getElementById("tal1").value;
+                let tal2 = document.getElementById("tal2").value;
+                let outP = document.getElementById("storst");
+                
+                if(tal1 == tal2){
+                    outP.innerText = `${tal1} er like stort som ${tal2}`;
+                }else if( tal1 > tal2){
+                    outP.innerText = `${tal1} er større enn ${tal2}`;
+                }else{
+                    outP.innerText = `${tal1} er mindre enn ${tal2}`;
+                }
+            }
+        </script>
+
+    <h1>Oppg 1 - Par og Odeetal</h1>
+        <input type="number" id="inNum">
+        <button onclick="bestemmTal()">Bestemm</button>
+        <div id="svar">
+
+        </div>
+        <script>
+                function bestemmTal(){
+                    tal = document.getElementById("inNum").value;
+                    if(Number(tal) % 2 == 0){
+                        document.getElementById("svar").innerText = `${tal} er eit partal`;
+                    }else{
+                        document.getElementById("svar").innerText = `${tal} er eit oddetal`;
+                    }
+                }
+        </script>
+    
+</body>
+</html>
