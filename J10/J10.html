@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function dg(inp){
+            let ret  = document.getElementById(inp);
+            if(ret == null)
+                console.log(inp + " Lagde eit nullobjekt");
+            return ret;
+        }
+        function dgv(inp){
+            return dg(inp).value;
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Oppg 8 - Fortollingsvas</h1>
+    <input type="number" id="daler" placeholder="Skriv in kjøpsummen i dollar">
+    <button onclick="fortollar()">Fortoll</button>
+    <div id="8ut"></div>
+
+    <script>
+        function fortollar(){
+            let dollarVerdi = dgv("daler");
+            let kroneVerdi = dollarTilNok(dollarVerdi);
+            let etterToll = kroneVerdi + 250;
+            let sluttPris = leggTilMVA(etterToll);
+            let sluttverdi = sluttVerdi(dollarVerdi);
+            let paaslag = sluttverdi - kroneVerdi;
+            dg("8ut").innerText = 
+                "Ei vare som kostar $" 
+                + dollarVerdi 
+                + " vil koste " 
+                + sluttVerdi(dollarVerdi).toFixed(2) 
+                + "kr etter fortolling, som er eit påslag på " 
+                + Math.floor((paaslag / kroneVerdi) * 100)
+                + "%";
+
+        }
+        function sluttVerdi(dollar){
+            return leggTilMVA(leggTilToll(dollarTilNok(dollar)));
+        }
+        function leggTilToll(kronepris){
+            return kronepris + 249;
+        }
+        function leggTilMVA(pris){
+            return pris * 1.25;
+        }
+
+        function dollarTilNok(dollar){
+            return 10.27*dollar;
+        }
+    </script>
+
+
+
+    <h1>Oppg 7</h1>
+    <input type="text" id="fNamn" placeholder="Fornamn">
+    <input type="text" id="mNamn" placeholder="Mellomnamn">
+    <input type="text" id="eNamn" placeholder="Etternamn">
+    <button onclick="initialGenerator()">Gje initialer</button>
+    <div id="7ut"></div>
+
+    <script>
+        function initialGenerator(){
+            let fNamn = dgv("fNamn");
+            let mNamn = dgv("mNamn");
+            let eNamn = dgv("eNamn");
+
+            let outstreng = fNamn[0].toUpperCase() + ". " + mNamn[0].toUpperCase() + ". " + eNamn[0].toUpperCase() + eNamn.slice(1, eNamn.length);
+            console.log(outstreng);
+        }
+    </script>
+
+    <h1>Oppg 5 / 6 - boksvolum og overflate</h1>
+    <input type="number" name="" id="bhog" placeholder="skriv in høgde">
+    <input type="number" name="" id="blen" placeholder="skriv in lengde">
+    <input type="number" name="" id="bbre" placeholder="skriv in breidde">
+    <button onclick="reknBoks()">Rekn volum</button>
+    <div id="5ut"></div>
+    <div id="6ut"></div>
+
+    <script>
+        function reknBoks(){
+            let len = dgv("blen");
+            let bre = dgv("bbre");
+            let hog = dgv("bhog");
+            let volum = reknVolum(hog, len, bre);
+            let overflate = reknOver(hog, len, bre);
+            dg("5ut").innerHTML = "volumet av boksen er " + volum + "cm<sup>3</sup>";
+            dg("6ut").innerHTML = "Overflata av boksen er " + overflate + "cm<sup>2</sup>";
+
+        }
+        function reknVolum(hog, len, bre){
+            return hog * reknAreal(len, bre);
+        }
+        function reknOver(hog, len, bre){
+            let overflate = 
+                2 * reknAreal(hog, len) +
+                2 * reknAreal( len, bre) +
+                2 * reknAreal(hog, bre);
+            return overflate;
+        }
+
+
+
+    </script>
+
+
+    <h1>Oppg 4</h1>         
+    <input type="number" id="rad" placeholder="Skriv in radius">
+    <button onclick="radiusRekn()">Rekn ut radius</button>
+    <div id="4ut"></div>
+
+    <script>
+        function radiusRekn(){
+            dg("4ut").innerHTML = "Arealet til ein sirkel med rad = " + dgv("rad") + " er lik " + reknRad(dgv("rad")).toFixed(2) + "cm<sup>2</sup>"
+
+        }
+        function reknRad(radius){
+            return radius* radius * Math.PI;
+        }
+
+    </script>
+
+    <h1>Oppg 3</h1>
+
+    <input type="number" name="" id="lengde" placeholder="Skriv in lengde">
+    <input type="number" id="hogde" placeholder="Skriv in høgde">
+    <button onclick="rektAreal()">Rekn ut høgde</button>
+    <div id="3ut">  </div>
+
+    <script>
+        function rektAreal(){
+            let hogde = dgv("hogde");
+            let lengde = dgv("lengde");
+            let areal = reknAreal(hogde, lengde);
+
+            dg("3ut").innerText = `Arealet av eit rektangel som er ${lengde}cm långt og ${hogde}cm høgt er ${areal}cm`
+            dg("3ut").innerHTML += "<sup>2</sup>"
+        }
+
+        function reknAreal(a, b){
+            return a * b;
+        }
+    </script>
+
+    <h1>Oppg 2</h1>
+
+    <input type="number" name="" id="lval">
+    <input type="number" name="" id="rval">
+    <button onclick="gjeStyrste()">Sjå styrst</button>
+    <div id="2utskrift"></div>
+
+    <script>
+        function gjeStyrste(){
+            let lval = dgv("lval");
+            let rval = dgv("rval");
+
+            dg("2utskrift").innerText = retStyrst(rval, lval) + " er styrst";
+
+        }
+        function retStyrst(a,b){
+            return (a > b)? a : b; 
+        }
+    </script>
+
+    
+    <h1>Oppg 1 </h1>
+
+    <input type="text" id="alder">
+    <button onclick="reknAlder()">rekn ut alder</button>
+    <div id="1utskrift"></div>
+    <script>
+        function reknAlder(){
+            let alder = dgv("alder");
+            let utskrift = dg("1utskrift");
+            console.log(alder);
+            if(alder < 13)
+                utskrift.innerText = "Du er ein unge";
+            else if( alder < 19)
+                utskrift.innerText = "Du er ein tenåring";
+            else if(alder < 67 )
+                utskrift.innerText = "Du er vaksen";
+            else
+                utskrift.innerText = "Du er pensjonist";
+
+        }
+    </script>
+</body>
+</html>
