@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function dg(inp){
+            let ret  = document.getElementById(inp);
+            if(ret == null)
+                console.log(inp + " Lagde eit nullobjekt");
+            return ret;
+        }
+        function dgv(inp){
+            return dg(inp).value;
+        }
+                  
+    </script>
+</head>
+<body>
+    <h2>Oppg 10 - steg for steg </h2>
+    <input type="number" id="fraa" placeholder="start frå">
+    <input type="number" name="" id="til" placeholder="gå til">
+    <button onclick="opp10()">start</button>
+    <div id="10ut"></div>
+
+    <script>
+        function opp10(){
+            let fraa = Number(dgv("fraa"));
+            let til = Number(dgv("til"));
+            dg("10ut").innerHTML = kvileLykke(fraa, til);
+        }
+    </script>
+
+
+
+    <h2>Oppg 9 - while igjen</h2>
+    <button onclick="oppg9()">rekn</button>
+    <div id="9ut"></div>
+    <script>
+        function oppg9(){
+            dg("9ut").innerHTML = kvileLykke(12,98,5);
+        }
+    </script>
+
+
+    <h2>Oppg 8 - While</h2>
+    <div id="8u"></div>
+    <button onclick="oppg8()">rekn</button>
+    <div id="8ut"></div>
+
+    <script>
+        function oppg8(){
+            dg("8ut").innerHTML = kvileLykke(1,7);
+        }
+        function kvileLykke(fraa, til , steg = 1, modulo = 1){
+            let outstreng = "";
+            let counter = fraa;
+            while(counter <= til){
+                if(counter % modulo == 0){
+                    outstreng += ( "<p> eg er tal nr " + counter + "</p>");
+                }
+                counter += steg;
+            }
+            return outstreng;
+
+        }
+    </script>
+
+    <h2>Oppg 7 - Matriserekning</h2>
+    <input type="number" id="matrise">
+    <button onclick="skrivMatrise()">rekn</button>
+    <div id="7ut"></div>
+
+    <script>
+        function skrivMatrise(){
+            let gongar = dgv("matrise");
+            let outstreng = "";
+            for(let i = 0; i <= gongar; i++){
+                outstreng += (i + '\t' + "x\t" + i + "\t" + "=" + (i*i) + '\n');
+            }
+            dg("7ut").innerText = outstreng;
+        }
+    </script>
+
+    <h2>Oppg 6</h2>
+    <textarea name="" id="setning"></textarea>
+    <input type="number" id="gongar">
+    <button onclick="skrivFleireGongar()">skriv ut X gongar</button>
+    <p id="6ut"></p>
+
+    <script>
+        function skrivFleireGongar(){
+            let tekst = dgv("setning");
+            let gongar = Number(dgv("gongar"));
+            let outstreng = "";
+            for(let i = gongar;  i > 0; i--){
+                outstreng += tekst;
+                outstreng += '\n';
+            }
+            dg("6ut").innerText = outstreng;
+            
+        }
+    </script>
+
+
+    <h2>Oppg 5 - 8 og 3-gongen</h2>
+    <button onclick="buzz()">Skriv</button>
+    <div id="5ut"></div>
+    <script>
+        function buzz(){
+            let skriveStreng = "[" ;// for å sleppe alle newlineane
+             for(let i = 0; i <= 100; i++){
+                if(i % 8 == 0 && i % 3 == 0)
+                    skriveStreng += i + ", ";
+             }
+            skriveStreng = skriveStreng.substring(0, skriveStreng.length - 2);
+            skriveStreng += "]";
+            dg("5ut").innerText = skriveStreng;
+        }
+    </script>
+    <h2>Oppg 4 - 5 og 2 gongen</h2>
+    <button onclick="fizz()">skriv</button>
+    <div id="4ut"></div>
+
+    <script>
+        function fizz(){
+            let skriveStreng = "[" ;// for å sleppe alle newlineane
+             for(let i = 0; i <= 100; i++){
+                if(i%5 == 0 && i % 2 == 0)
+                    skriveStreng += i + ", ";
+             }
+            skriveStreng = skriveStreng.substring(0, skriveStreng.length - 2);
+            skriveStreng += "]";
+            dg("4ut").innerText = skriveStreng;
+        }
+    </script>
+
+
+    <h2>Oppg 3</h2>
+    <button onclick="femGongeSkriv()">skriv ut 5-gongen</button>
+    <div id="3ut"></div>
+    <script>
+        function femGongeSkriv(){
+            let skriveStreng = "[" ;// for å sleppe alle newlineane
+             for(let i = 0; i <= 100; i++){
+                if(i%5 == 0)
+                    skriveStreng += i + ", ";
+             }
+            skriveStreng = skriveStreng.substring(0, skriveStreng.length - 2);
+            skriveStreng += "]";
+            dg("3ut").innerText = skriveStreng;
+        }
+    </script>
+
+    <h2>Oppg 2 - odddetalløkke</h2>
+    <button onclick="oddeTalSkriv()">skriv Oddetal</button>
+    <div id="2ut"></div>
+
+    <script>
+        function oddeTalSkriv(){
+            let skriveStreng = "[" ;// for å sleppe alle newlineane
+             for(let i = 0; i <= 100; i++){
+                if(i%2 != 0)skriveStreng += i + ", "
+             }
+            skriveStreng = skriveStreng.substring(0, skriveStreng.length - 2);
+            skriveStreng += "]";
+            dg("2ut").innerText = skriveStreng;
+        }
+    </script>
+
+    <h2>Oppg 1 - forløkker</h2>
+    <button onclick="partalSkrib()">Skriv partal</button>
+    <div id="1ut"></div>
+
+    <script>
+        function partalSkrib(){
+            let skriveStreng = "[" ;// for å sleppe alle newlineane
+             for(let i = 0; i <= 100; i++){
+                if(i%2 == 0)skriveStreng += i + ", "
+             }
+            skriveStreng = skriveStreng.substring(0, skriveStreng.length - 2);
+            skriveStreng += "]";
+            dg("1ut").innerText = skriveStreng;
+        }
+    </script>
+</body>
+</html>
