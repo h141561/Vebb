@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="spelarar.js"></script>
+    <script src="spelarar.js"></script>
+    <script>
+        class kjeledyr{
+            namn;
+            fodeaar;
+            mor;
+            far;
+            rase;
+            constructor(namn,aar, mamma, pappa, rase){
+                this.namn = namn;
+                this.fodeaar = aar;
+                this.mor = mamma;
+                this.far = pappa;
+                this.rase = rase;
+            }
+            getNamn(){
+                return this.namn;
+            }
+        }
+        function skrivlag(){
+            lag.forEach(spelar => {
+                console.log(spelar)
+            });
+        }
+        function lagKortSpelar(){
+            let spelarType = document.getElementById("pos").value;
+            console.log(spelarType);
+            lagKort(spelarType);
+        }
+        function lagKort(posisjon = ""){
+            document.getElementById("fotball").innerHTML = "";
+            lag.forEach(spelar =>{
+                if(spelar.Posisjon != posisjon && posisjon !== ""){
+                    return;
+                }
+                let kort = "<kort>"
+                noklar = Object.keys(spelar);
+                console.log(noklar);
+                if(spelar.Bilete){
+
+                    kort += `<img src="${spelar.Bilete}">`;
+                }else{
+                    kort += `<img src="brann">`;
+                }
+                kort += `<h3>${spelar.Fornavn} ${spelar.Etternavn}</h3>`
+                
+                for(let i = 0; i < noklar.length; i++){
+                    nokkel = noklar[i]
+                    if(nokkel == "Fornavn" || nokkel == "Etternavn"|| nokkel == "Bilete"){
+                        continue;
+                    }
+                    console.log(noklar[i] + " er " + spelar[nokkel]);
+                    kort += `<div class="par"><h4>${nokkel}</h4><p>${spelar[nokkel]}</p></div>`;
+
+                }
+                kort += "</kort>";
+                document.getElementById("fotball").innerHTML += kort;
+            })
+            
+        }
+    </script>
+    <style>
+        table *{
+            border: 1px black solid;
+                    
+        }
+        #fotball{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        kort{
+            border: 1px black solid;
+            display:  grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-start: 2;
+            grid-row-start: 2;
+            width: 200px;
+            padding: 1px;
+            margin: 1em;
+            color: wheat;
+            background-color: red;
+            font-weight: 900;
+            
+        }
+
+        kort > img{
+            background: 1px red solid;
+            display: table-column;
+            align-self: center;
+            margin: auto;
+            width: 100%;
+        }
+        kort > .par{
+            margin: 1px;
+            margin-left: 1px;
+            
+            
+            border: 1px blue solid;
+        }
+        .par > *{
+            display: block;
+            margin :0em;
+        }
+        .par > p{
+            margin-left: 4px;
+            font-weight: 600;
+        }
+        kort > h3{
+            width: 100%;
+            display: block;
+            grid-column: 1 / span 2;
+        }
+        kort > img{
+            grid-column: 1 / span 2;
+        }
+        h4{
+            padding: 0px;
+            margin: 0em;
+        }
+    </style>
+</head>
+<body onload="lagDyr()">
+    <h1>Oppg 3</h1>
+    <button onclick="lagKortSpelar('')">Skriv lag</button>
+    <select name="pos" id="pos">
+        <option value="">Alle</option>
+        <option value="Midtbanespiller">Midtbane</option>
+        <option value="Keeper">Keeper</option>
+        <option value="Forsvarsspiller">Forsvars</option>
+        <option value="Angrepsspiller">Spiss</option>
+    </select>
+    <div id="fotball"></div>
+
+    <namn>Ole</namn>
+    <button onclick="dyrTilTabell()">lag dyr</button>
+    <table id="dyr">
+        
+    </table>
+    <script>
+        let mineDyr = new Array();
+        function lagDyr(){
+            mineDyr.push(new kjeledyr("Sjanto", 2018, "Sheila", "Ronin", "Japansk spitz"));
+            mineDyr.push(new kjeledyr("Milli Vanilli", 2014, "Milli", "Vanilli", "Shitzu"));
+            mineDyr.push(new kjeledyr("Hugo", 2000, "Filifjonk", "Barbrapapa", "Katt"));
+            mineDyr.push(new kjeledyr("Argos", -400, "Athena", "Zevs", "Ein god ein"));
+            mineDyr.push(new kjeledyr("Seymour", 1990, "Tispe", "Fry", "Blanding"));
+            for(let i = 0; i < mineDyr.length; i++){
+                console.log(i);
+                console.log(Object.keys(mineDyr[i]))
+            }
+        }
+        function dyrTilTabell(){
+            noklar = Object.keys(mineDyr[0]);
+            let tabell = document.getElementById("dyr");
+            let nyHead = "<tr>"
+            noklar.forEach(element => {
+                nyHead += `<th>${element}</th>`;
+            });
+            nyHead += "</tr>";
+            tabell.innerHTML += nyHead;
+            mineDyr.forEach( dyr=>{
+                    tabell.innerHTML+=`
+                        <tr>
+                            <td>${dyr.namn}</td>
+                            <td>${dyr.fodeaar}</td>
+                            <td>${dyr.mor}</td>
+                            <td>${dyr.far}</td>
+                            <td>${dyr.rase}</td>
+                        </tr>
+                    `;
+                }   
+            )
+        }
+    </script>
+</body>
+</html>
