@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="J17.js"></script>
+    <style>
+        #kortDiv{
+            display: flex;
+            flex: auto;
+        }
+        kort{
+            
+            border: 1px black solid;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            width: 300px;
+            background-color: lightgray;
+            margin-bottom: 1em;
+            
+        }
+        kort > * {
+            display: inline;
+            
+            border: 1px red dotted;
+            
+        }
+        kort > span{
+            margin-left: 10px;
+                width: 90%;
+            
+        }
+        kort > img{
+            width: 200px;
+            height: 100%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body onload="samlingTilKort(countries, 'kortDIV', 'land')">
+    <div id="kortDIV">
+
+    </div>
+</body>
+</html>
