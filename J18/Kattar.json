@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "name": "Whiskers",
+        "breed": "Siamese",
+        "age": 3,
+        "favorite_toy": "Feather wand"
+    },
+    {
+        "id": 2,
+        "name": "Mittens",
+        "breed": "Maine Coon",
+        "age": 5,
+        "favorite_toy": "Catnip mouse"
+    },
+    {
+        "id": 3,
+        "name": "Shadow",
+        "breed": "Bengal",
+        "age": 2,
+        "favorite_toy": "Laser pointer"
+    },
+    {
+        "id": 4,
+        "name": "Luna",
+        "breed": "Persian",
+        "age": 4,
+        "favorite_toy": "Yarn ball"
+    },
+    {
+        "id": 5,
+        "name": "Oliver",
+        "breed": "Ragdoll",
+        "age": 6,
+        "favorite_toy": "Crinkle tunnel"
+    },
+    {
+        "id": 6,
+        "name": "Bella",
+        "breed": "Sphynx",
+        "age": 1,
+        "favorite_toy": "Soft blanket"
+    },
+    {
+        "id": 7,
+        "name": "Max",
+        "breed": "British Shorthair",
+        "age": 7,
+        "favorite_toy": "Interactive puzzle"
+    },
+    {
+        "id": 8,
+        "name": "Lucy",
+        "breed": "Scottish Fold",
+        "age": 2,
+        "favorite_toy": "Plush fish"
+    },
+    {
+        "id": 9,
+        "name": "Charlie",
+        "breed": "Abyssinian",
+        "age": 4,
+        "favorite_toy": "Scratching post"
+    },
+    {
+        "id": 10,
+        "name": "Daisy",
+        "breed": "Russian Blue",
+        "age": 5,
+        "favorite_toy": "Cardboard box"
+    }
+]

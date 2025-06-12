@@ -83,10 +83,56 @@ function samlingTilCol(samling, namn  = "Rad"){
     return streng + "</tr>";
 }
     </script>
+    <style>
+        #katteboks{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        katt{
+            background-color: beige;
+            border: 1px black solid;
+            margin: 1em;
+            padding: 1em;
+        }
+        katt > p{
+            margin-left: 1em;
+        }
+        katt > * {
+            margin: 3px;
+        }
+
+    </style>
 </head>
 <body onload="last()">
+    <h1>Oppg 4 - kattar</h1>
+    <button onclick="lagKattar()">Lag Kattar</button>
+    <div id="katteboks"></div>
+
+    <script>
+        let kattar = null;
+        function lagKattar(){
+            console.log(kattar)
+            console.log(typeof(kattar));
+            kattar.forEach(katt => {
+                dg("katteboks").innerHTML += 
+                `
+                <katt>
+                    <h3>Name</h3>
+                        <p>${katt.name}</p>
+                    <h3>Rase</h3>
+                        <p>${katt.breed}</p>
+                    <h3>Favorittleike</h3>
+                        <p>${katt.favorite_toy}</p>
+                    <h3>Alder</h3>
+                        <p>${katt.age} år</p>                    
+                </katt>`
+                
+            });
+        }
+    </script>
+
     <h1>Oppg 3</h1>
-    <button onclick="skrivSteg()">Les in steb</button>
+    <button onclick="skrivSteg()">Les in steg</button>
     <ul id="stegliste"></ul>
     <script>
         let steg = "d";
@@ -98,7 +144,6 @@ function samlingTilCol(samling, namn  = "Rad"){
                 if(char == ','){
                     rekke.push(Number(num));
                     num = "";
-                    
                 }else{
                     num += char;
                 }
@@ -106,7 +151,7 @@ function samlingTilCol(samling, namn  = "Rad"){
             for(let i = 0; i < rekke.length; i++){
                 dg("stegliste").innerHTML += `<li>Dag ${i} gjekk eg ${rekke[i]} steg</li>`;
             }
-            dg("stegliste").innerHTML += `<li>Du har gått i gjenomsnitt ${gjennomsnitt(rekke).toFixed(0)} steg kvar dag`;
+            dg("stegliste").innerHTML += `<li>Eg har gått i gjenomsnitt ${gjennomsnitt(rekke).toFixed(0)} steg kvar dag`;
         }
         function gjennomsnitt(talVektor){
             let sum = 0;
@@ -121,6 +166,11 @@ function samlingTilCol(samling, namn  = "Rad"){
                 .then((data) => {
                     //console.log(data);
                     steg = data;
+                });
+            fetch("Kattar.json")
+                .then((res) => (res.json()))
+                .then((data) => {
+                    kattar = data;
                 });
         }
     </script>
