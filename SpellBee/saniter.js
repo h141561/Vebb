@@ -30,7 +30,7 @@ const nedreGrense = 4;
  * @type {string}
  * @default "elbtyg"
  */
-let ringBokstavar = "elbtyg";
+let ringBokstavar = "conatf";
 
 /**
  * sjekkar eit ord om det innehelder ein av karakterane
@@ -89,6 +89,15 @@ function velOrd(ord, log = false){
     if(log) console.log(`Ordet ${ord} har gått gjennom all testar og skal være gyldig`);
     return true;
 }
+/**
+ * skriver ei ait array til ei fil med riktiv formatering til å bli ein
+ * brukbar variabel i js
+ * @param {Array} strengArray sit array av strengar vi vil skrive til fil
+ * @param {string} filnamn namnet på fila vi vil skrive til
+ */
+function skrivTilFil(filnamn, strengArray){
+    fs.writeFileSync(filnamn, strengArray);
+}
 
 function main(){
     let infil = fs.readFileSync("words.txt", "utf-8");
@@ -105,6 +114,8 @@ function main(){
             ord += char.toLowerCase();
         }
     }
+
+    //ordnar strengane etter lengde i minkande orden
     let sorterte = new Array();
     for(let i = 7; i > 3; i--){
         for(ord of strengar){
@@ -114,10 +125,18 @@ function main(){
         }
     }
     strengar = sorterte;
+
+    // legger til tødlar og nylinjer for å få 
+    // strengar til å kunne brukast i javascript
+    let tabell = new Array();
     for(ord of strengar){
-        console.log(ord + " " + ord.length);
-        
+        tabell.push(`\t"${ord}",`);
     }
+    for(ord of tabell){
+        console.log(ord);    
+    }
+    console.log(tabell)
+    skrivTilFil( "bie.txt", "tabell");
 }
 main();
 

@@ -66,15 +66,15 @@ function genererTilfeldig(antal = 10, desimalar = 0, maks = 100){
  * @returns {string} returnerar alle elementa i i samling som eigne td-
  *      element
  */
-export function samlingTilCol(samling, namn  = "Rad"){
-        let streng = "<tr>";
-        if(namn)
-            streng += `<td>${namn}</td>`;
-        for(val of samling){
-            streng += `<td> ${val} </td>`;
-        }
-        return streng + "</tr>";
+function samlingTilCol(samling, namn  = "Rad"){
+    let streng = "<tr>";
+    if(namn)
+        streng += `<td>${namn}</td>`;
+    for(val of samling){
+        streng += `<td> ${val} </td>`;
     }
+    return streng + "</tr>";
+}
     
 
 function tst(){

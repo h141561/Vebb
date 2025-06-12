@@ -172,9 +172,26 @@ function samlingTilCol(samling, namn  = "Rad"){
                 .then((data) => {
                     kattar = data;
                 });
+            let elementa = document.getElementsByTagName("body");
+            for(element of elementa){
+                    element.style.backgroundColor = localStorage.getItem("bkgrFarge");
+            }
         }
     </script>
 
+    <h1>Oppg 2</h1>
+    <button onclick="kaos()"> farg alt</button>
+    <input type="color" name="" id="fargeVelgar">
+
+    <script>
+        function kaos(){
+            let elementa = document.getElementsByTagName("body");
+            for(element of elementa){
+                element.style.backgroundColor = dgv("fargeVelgar");
+            }
+            localStorage.setItem("bkgrFarge", dgv("fargeVelgar"));
+        }
+    </script>
 
     <h1>Oppg 1</h1>
     <input type="text" name="" id="fnamn" placeholder="Skriv in fornamn">
