@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        Kort{
+            width: 300px;
+            display: grid;
+            border: 1px black solid;
+        }
+        Kort > img{
+            width: 300px;
+        }
+        Kort > h1{
+            margin: auto;
+        }
+    </style>
+    <script>
+        
+/** Gjer tilbake referanse til HTML-dokumentet med id som ein gjer
+ *  @param {string} inp ID til noden ein vil ha
+ *  
+ * @returns {HTMLElement} referanse til ynskja element;
+ */
+function dg(inp){
+
+        let ret  = document.getElementById(inp);
+        if(ret == null)
+            console.log(inp + " Lagde eit nullobjekt");
+        return ret;
+}
+
+/**
+ * 
+ * @param tekst Streng som skal beskrive kva som har skjedd
+ * 
+ * @returns ingenting
+ */
+function Lerror(tekst){
+    console.log("Lerror > " + tekst);
+}
+
+/**
+ * Ein funksjon som gjer tilbake verdifeltet til eit HTML-element, bruk til
+ * å kutte ned på skriving og rot i funksjonane
+ * 
+ * @see {dg}
+ * @param {string} inp ID til noden ein vil ha
+ * @returns {HTMLElement} element.value til noden
+ */
+function dgv(inp){
+    return dg(inp).value;
+}
+
+/**
+ * Gjer tilbake ei samling med tilfeldig genererte tal, lengde på arrayet, kor
+ * månge desimalar tala skal ha og kor store tala skal være kan bestemmast med
+ * argumenta
+ * 
+ * @author Leon samson Vestby
+ * 
+ * @param {number} antal Antal tilfeldige tal som skal genererast, default = 10
+ * @param {number} desimalar Antal desimalar, default = 0
+ * @param {number} maks maksimal verdi av dei genererte tala default = 100
+ * 
+ * @returns {Array} ferdig laga array med verdiane spesifisert
+ */
+function genererTilfeldig(antal = 10, desimalar = 0, maks = 100){
+    let ret  = new Array();
+    for(let i = 0; i < antal; i++){
+        let nyttTal = (Math.random() * maks).toFixed(desimalar);
+        ret.push(nyttTal);
+    }
+    return ret;
+}
+
+/**
+ * Gjer om ei samling til tabellradar som kann leggast til innerHTML
+ * i eit HTMElement
+ * 
+ * @param {Array} samling Arrayet som skal skrivast ut
+ * @param {string} namn namn til rada som skal stå i fyrste kolonne
+ * 
+ * @returns {string} returnerar alle elementa i i samling som eigne td-
+ *      element
+ */
+function samlingTilCol(samling, namn  = "Rad"){
+    let streng = "<tr>";
+    if(namn)
+        streng += `<td>${namn}</td>`;
+    for(val of samling){
+        streng += `<td> ${val} </td>`;
+    }
+    return streng + "</tr>";
+}
+    
+
+function tst(){
+    samlingTilCol()
+}
+    </script>
+</head>
+<body>
+    <h1>Oppg 3 - straumprisar</h1>
+    <button onclick="oppg3()">Lag straumen</button>
+    <table id="straumTabell"></table>
+    <p>Snittprisen per dag var <span id="gjP">0</span> kr</p>
+    <p>Det var <span id="dagarOver"></span> dagar med straumpris over 2 kr</p>
+
+    <script>
+        function oppg3(){
+            let straumPrisar = genererTilfeldig(31, 1, 3);
+            dg("straumTabell").innerHTML = samlingTilCol(straumPrisar);
+            let gjennomsnitt =  (straumPrisar.reduce(adder)) / (straumPrisar.length + 1);
+            console.log(straumPrisar.reduce(adder));
+            dg("gjP").innerText = gjennomsnitt.toFixed(1);
+            dg("dagarOver").innerText = straumPrisar.reduce(counter);
+        }
+
+        function adder(sum, elem){
+            return Number(sum)+ Number(elem);
+        }
+        function counter(sum, elem){
+            return Number(sum) + (Number(elem)>2)?1:0;
+        }
+    </script>
+
+    <h1>Oppg 1 -Land frå JSON</h1>
+    <button onclick="oppg1()">Last land!</button>
+    <div id="flaggKont"></div>
+    <script>
+        function oppg1(){
+            fetch("land.json")
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    for(land of data.countries){
+                        let nytt = document.createElement("Kort");
+                        let bilete = document.createElement("img");
+                        bilete.setAttribute("src", land.flag);
+                        nytt.appendChild(bilete);
+                        
+                        let overskrift = document.createElement("h1");
+                        overskrift.innerText = land.name;
+                        nytt.appendChild(overskrift);
+
+                        let tabell = document.createElement("table")
+                        var hovudStad = tabell.insertRow(0);
+                            var hNamn = hovudStad.insertCell(0);
+                            let hovudStreng = hovudStad.insertCell(1);
+                            hNamn.innerHTML = "<h3>Hovudstad</h3>";
+                            hovudStreng.innerHTML = `${land.capital}`;
+                        let befoklning = tabell.insertRow(1);
+                            let skrift = befoklning.insertCell(0);
+                            skrift.innerHTML = "<h3>Befolkning</h3>";
+                            let talet = befoklning.insertCell(1);
+                            talet.innerHTML = `${land.inhabitants.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}`
+                        nytt.appendChild(tabell);
+
+                        
+                        dg("flaggKont").appendChild(nytt);
+
+                    }
+                })
+        }
+    </script>
+</body>
+</html>
