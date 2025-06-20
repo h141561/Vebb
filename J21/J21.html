@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+       
+/** Gjer tilbake referanse til HTML-dokumentet med id som ein gjer
+ *  @param {string} inp ID til noden ein vil ha
+ *  
+ * @returns {HTMLElement} referanse til ynskja element;
+ */
+function dg(inp){
+
+        let ret  = document.getElementById(inp);
+        if(ret == null)
+            console.log(inp + " Lagde eit nullobjekt");
+        return ret;
+}
+
+/**
+ * 
+ * @param tekst Streng som skal beskrive kva som har skjedd
+ * 
+ * @returns ingenting
+ */
+function Lerror(tekst){
+    console.log("Lerror > " + tekst);
+}
+
+/**
+ * Ein funksjon som gjer tilbake verdifeltet til eit HTML-element, bruk til
+ * å kutte ned på skriving og rot i funksjonane
+ * 
+ * @see {dg}
+ * @param {string} inp ID til noden ein vil ha
+ * @returns {HTMLElement} element.value til noden
+ */
+function dgv(inp){
+    return dg(inp).value;
+}
+
+/**
+ * Gjer tilbake ei samling med tilfeldig genererte tal, lengde på arrayet, kor
+ * månge desimalar tala skal ha og kor store tala skal være kan bestemmast med
+ * argumenta
+ * 
+ * @author Leon samson Vestby
+ * 
+ * @param {number} antal Antal tilfeldige tal som skal genererast, default = 10
+ * @param {number} desimalar Antal desimalar, default = 0
+ * @param {number} maks maksimal verdi av dei genererte tala default = 100
+ * 
+ * @returns {Array} ferdig laga array med verdiane spesifisert
+ */
+function genererTilfeldig(antal = 10, desimalar = 0, maks = 100){
+    let ret  = new Array();
+    for(let i = 0; i < antal; i++){
+        let nyttTal = (Math.random() * maks).toFixed(desimalar);
+        ret.push(nyttTal);
+    }
+    return ret;
+}
+
+/**
+ * Gjer om ei samling til tabellradar som kann leggast til innerHTML
+ * i eit HTMElement
+ * 
+ * @param {Array} samling Arrayet som skal skrivast ut
+ * @param {string} namn namn til rada som skal stå i fyrste kolonne
+ * 
+ * @returns {string} returnerar alle elementa i i samling som eigne td-
+ *      element
+ */
+function samlingTilCol(samling, namn  = "Rad"){
+    let streng = "<tr>";
+    if(namn)
+        streng += `<td>${namn}</td>`;
+    for(val of samling){
+        streng += `<td> ${val} </td>`;
+    }
+    return streng + "</tr>";
+}
+    
+
+function tst(){
+    samlingTilCol()
+} 
+    </script>
+</head>
+<body onload="oppg1()">
+    <h1>Oppg 5 - arraydestruering</h1>
+    <button onclick="Oppg5()">Destruer</button>
+
+    <script>
+        function Oppg5(){
+            let array = [1, 2, 3, 4, 5];
+            let [nr1, , , , nr5] = array;
+            console.log(`nr1: ${nr1}, nr 5: ${nr5}`);
+        }
+    </script>
+
+    <h1>Oppg 4 - destruering</h1>
+    <button onclick="Oppg4()">Lag mann</button>
+
+    <script>
+        function Oppg4(){
+            class Borgar{
+                namn = "tom";
+                by = "tom";
+                age = -1;
+                constructor(namn, by, age){
+                    this.namn = namn
+                    this.by = by;
+                    this.age = age;
+                }
+            }
+            let timoty = new Borgar("timoty","Bærgen", 33);
+            console.log(timoty);
+            let {namn:firstname, age:age} = timoty;
+            console.log(firstname);
+        }
+    </script>
+
+    <h1>Oppg 3 - samlingsoperator</h1>
+    <button onclick="Oppg3()">samling</button>
+
+    <script>
+        function Oppg3(){
+            console.log(varlegg(1,2,3,4));
+        }
+
+        function varlegg(...args){
+            if(args.length == 0)
+                return args;
+            else
+                return Number(args.pop() + varlegg(...args));
+        }
+    </script>
+
+    <h1>Oppg 2 - Spread</h1>
+    <button onclick="oppg2()">Oppg 2</button>
+
+    <script>
+        function oppg2(){
+            let arr = [1,2,3];
+            console.log("Før:");
+            console.log(arr);
+            console.log("spread add:");
+            let arr2 = [...arr, 4];
+            console.log(arr2);
+
+            
+
+        }
+
+
+    </script>
+
+    
+    <h1 id="o1" ></h1>
+    <div id="1Div"></div>
+
+    <script>
+        function oppg1(){
+            dg("o1").innerText = "Oppg 1 & 6";
+            let knapp = document.createElement("button");
+            knapp.innerText ="Laga knapp";
+            dg("1Div").appendChild(knapp)
+            knapp.addEventListener("click", function(){
+                let nyknapp = document.createElement("button");
+                nyknapp.innerText = "nyknapp";
+                
+                dg("1Div").appendChild(nyknapp);
+                nyknapp.addEventListener("mouseover", function(){
+                    nyknapp.style.backgroundColor = "red";
+                });
+                nyknapp.addEventListener("mouseleave", function(){
+                    nyknapp.style.backgroundColor = "white";
+                })
+            });
+
+        }
+    </script>
+</body>
+</html>
