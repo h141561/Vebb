@@ -6,9 +6,15 @@
     <title>Document</title>
     <script src="script.js"></script>
     <style>
+        .gjisseFelt{
+            width: 90%;
+            background-color:lightyellow;
+            border-radius: 0.2em;
+            font-size: 3em;
+            margin: 1px;
+        }
         .innFelt{
-            width: 4rem;
-            height: 4rem;
+            width: 90%;
             text-decoration: none;
             text-align: center;
             font-size: 4em;
@@ -16,14 +22,34 @@
             background-color: lightgreen;
             color: white;
             border-radius: 0.2em;
+            margin: 1px;
         }
-        #posisjonar{
+        .gjisseKontainer{
             border: 2px black solid;
             border-radius: 1em;
+            display: inline-grid;
             padding: 1em;
-            display: inline-block;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            width: 100%;
+            max-width: 400px;
+            justify-content: space-evenly;
+            
+        }
+        #posisjonar{
+        }
+        #rak{
+            display: flex;
+            flex-direction: column;
             width: 50%;
-            justify-content: center;
+        }
+        div{
+           
+        }
+        #snusar{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            justify-content: space-evenly;
+            width: 100%;
         }
         input{
             height: 1em;
@@ -38,23 +64,24 @@
         }
         #svar{
             background-color: wheat;
-            width: 40%;
+            width: 45%;
             display: inline-grid;
             grid-template-columns: 1fr 1fr 1fr;
             float: right;
-            
         }
         #feilPos{
-            width: 49%;
-            display: inline-grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
+        }
+        #leiteChars{
+            grid-column: 2 /span 2;
         }
         #feilPos > *{
-            width: 80%;
+            
+        }
+        .kanskjeFelt{
+
         }
         #kontrollar{
-            width: 50%;
+            
         }
         #kontrollar > input{
             width: 100%;
@@ -70,19 +97,47 @@
         #med{
             background-color: rgb(179, 179, 16);
         }
+        #med, #ikkjeMed{
+            grid-column: 2 /span 3;
+        }
+        .koyrSlett{
+            grid-column:  span 2;
+            width: 90%;
+        }
         ul{
             list-style-type: none;
         }
         li{
             text-decoration: none;
         }
-        #snusar{
-            display: flex;
-            width: 49%;
-            margin: 5px;
+
+ 
+        .tooltipText{
+            visibility: hidden;
+
         }
-        #snusar > *{
-            width: 30%;
+        .toolTip:hover > *{ 
+            visibility: visible;
+        }
+        .tooltipText{
+            visibility: hidden;
+            position: relative;
+            background-color: black;
+            color: wheat;
+            border: 1px black solid;
+            padding: 0.5em;
+        }
+        .forklaring{
+            
+            width: 100%;
+            border:  1px red solid;
+            grid-row: 1 / -1;
+            grid-column: 1 / -1 ;
+            margin: 1px;
+            text-align: center;
+        }
+        h3{
+
         }
     </style>
 </head>
@@ -95,32 +150,41 @@
         <ul id="umoglegeAlternativ"></ul>
         <ul id="Snuseord"></ul>
     </div>
+    <div id="rak">
+
     <p>Moglege ord: <span id="alternativ"></span></p>
-    <div id="posisjonar">
-        <input id="0char" autocomplete="off" class="innFelt" type="text" maxlength="1">
-        <input id="1char" autocomplete="off" class="innFelt" type="text" maxlength="1">
-        <input id="2char" autocomplete="off" class="innFelt" type="text" maxlength="1">
-        <input id="3char" autocomplete="off" class="innFelt" type="text" maxlength="1">        
-        <input id="4char" autocomplete="off" class="innFelt" type="text" maxlength="1">
+    
+    <div class="gjisseKontainer" id="posisjonar">
+        <h1 class="forklaring" title="Skriv in alle grøne(bekrefta) bokstavar i den rekkefølga dei er i">Bekrefta bokstavar</h1>
+        <input id="0char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
+        <input id="1char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
+        <input id="2char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
+        <input id="3char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">        
+        <input id="4char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
     </div><br>
-    <div id="feilPos">
-        <input type="text" autocomplete="off" class="kanskjeFelt" name="" id="0str" maxlength="4">
-        <input type="text" autocomplete="off" class="kanskjeFelt" name="" id="1str" maxlength="4">
-        <input type="text" autocomplete="off" class="kanskjeFelt" name="" id="2str" maxlength="4">
-        <input type="text" autocomplete="off" class="kanskjeFelt" name="" id="3str" maxlength="4">
-        <input type="text" autocomplete="off" class="kanskjeFelt" name="" id="4str" maxlength="4">
+    <div class="gjisseKontainer" id="feilPos">
+        <h1 class="forklaring">
+            Feilposisjonerte bokstavar
+        </h1>
+        <input type="text" autocomplete="off" class="gjisseFelt kanskjeFelt" name="" id="0str" maxlength="4">
+        <input type="text" autocomplete="off" class="gjisseFelt kanskjeFelt" name="" id="1str" maxlength="4">
+        <input type="text" autocomplete="off" class="gjisseFelt kanskjeFelt" name="" id="2str" maxlength="4">
+        <input type="text" autocomplete="off" class="gjisseFelt kanskjeFelt" name="" id="3str" maxlength="4">
+        <input type="text" autocomplete="off" class="gjisseFelt kanskjeFelt" name="" id="4str" maxlength="4">
     </div>
-    <div id="kontrollar">
-        <input type="text" name="" autocomplete="off" id="ikkjeMed"><br>
+    <div class="gjisseKontainer" id="kontrollar">
+        <h3 title="Skriv in alle bokstavane som er utelukka(grå)">Utelukka</h3>
+        <input style="" type="text" name="" autocomplete="off" id="ikkjeMed"><br>
+        <h3 title="skriv in bokstavar som er med (Gule eller grøne)">bekrefta</h3>
         <input type="text" autocomplete="off" id="med"><br>
-        <button onclick="filtrer()">Køyr</button>
-        <button onclick="clr()">slett</button>
+        <button class="koyrSlett" onclick="filtrer()">Køyr</button>
+        <button class="koyrSlett" onclick="clr()">slett</button>
     </div>
-    <div id="snusar">
+    <div class="gjisseKontainer" id="snusar">
         <h2>Søk:</h2>
         <input type="text" autocomplete="off" name="" id="leiteChars">
         <button onclick="snus()">Leit</button>
     </div>
-    
+    </div>
 </body>
 </html>
