@@ -1,4 +1,87 @@
 
+/** Gjer tilbake referanse til HTML-dokumentet med id som ein gjer
+ *  @param {string} inp ID til noden ein vil ha
+ *  
+ * @returns {HTMLElement} referanse til ynskja element;
+ */
+function dg(inp){
+
+        let ret  = document.getElementById(inp);
+        if(ret == null)
+            console.log(inp + " Lagde eit nullobjekt");
+        return ret;
+}
+
+/**
+ * 
+ * @param tekst Streng som skal beskrive kva som har skjedd
+ * 
+ * @returns ingenting
+ */
+function Lerror(tekst){
+    console.log("Lerror > " + tekst);
+}
+
+/**
+ * Ein funksjon som gjer tilbake verdifeltet til eit HTML-element, bruk til
+ * å kutte ned på skriving og rot i funksjonane
+ * 
+ * @see {dg}
+ * @param {string} inp ID til noden ein vil ha
+ * @returns {HTMLElement} element.value til noden
+ */
+function dgv(inp){
+    return dg(inp).value;
+}
+
+/**
+ * Gjer tilbake ei samling med tilfeldig genererte tal, lengde på arrayet, kor
+ * månge desimalar tala skal ha og kor store tala skal være kan bestemmast med
+ * argumenta
+ * 
+ * @author Leon samson Vestby
+ * 
+ * @param {number} antal Antal tilfeldige tal som skal genererast, default = 10
+ * @param {number} desimalar Antal desimalar, default = 0
+ * @param {number} maks maksimal verdi av dei genererte tala default = 100
+ * 
+ * @returns {Array} ferdig laga array med verdiane spesifisert
+ */
+function genererTilfeldig(antal = 10, desimalar = 0, maks = 100){
+    let ret  = new Array();
+    for(let i = 0; i < antal; i++){
+        let nyttTal = (Math.random() * maks).toFixed(desimalar);
+        ret.push(nyttTal);
+    }
+    return ret;
+}
+
+/**
+ * Gjer om ei samling til tabellradar som kann leggast til innerHTML
+ * i eit HTMElement
+ * 
+ * @param {Array} samling Arrayet som skal skrivast ut
+ * @param {string} namn namn til rada som skal stå i fyrste kolonne
+ * 
+ * @returns {string} returnerar alle elementa i i samling som eigne td-
+ *      element
+ */
+function samlingTilCol(samling, namn  = "Rad"){
+    let streng = "<tr>";
+    if(namn)
+        streng += `<td>${namn}</td>`;
+    for(val of samling){
+        streng += `<td> ${val} </td>`;
+    }
+    return streng + "</tr>";
+}
+    
+
+function tst(){
+    samlingTilCol()
+}
+
+
 /**
  * sjekkar eit ord om det innehelder ein av karakterane
  * @param {String} ord strengen som skal sjekkast 
@@ -154,6 +237,80 @@ function filtrer(){
 	console.log(umoglegeOrd)
 
 }
+function bieSok(){
+	let uteChars = "";
+	for(let i = 1; i <= 6; i++){
+		let id = "BI-" + i.toString();
+		uteChars += dgv(id).toLowerCase();
+	}
+	let sentralChar = dgv("BI-0");
+
+	if(moglegeOrd.length <= 0){
+		moglegeOrd = bieLoad(uteChars, sentralChar)
+	}
+	//console.log(moglegeOrd);
+
+
+}
+
+/**
+ * Tar in eit ord og veler om det skal behandlast om eit gyldig ord
+ * @param {string} ord ordet som skal sjekkast
+ * @param {boolean} log Om debug-info skal skrivast ut, default = false
+ * 
+ * @returns {boolean} true om ordet er gyldig, False om ordet ikkje skal takast med
+ */
+function gyldigBieOrd(ord, ovreGrense, nedreGrense, ringBokstavar, sentralbokstav, log = false){
+    if(ord.length > ovreGrense){
+        if(log) console.log(`Ordet ${ord} er for långt, ordet har ${ord.length} som er lengre enn ${ovreGrense}`);
+        return false;
+    }
+    if(ord.length < nedreGrense){
+        if(log) console.log(`Ordet ${ord} er for kort, ordet har ${ord.length} bokstavar som er kortare enn ${nedreGrense}`);
+        return false;
+    }
+    if(!harBokstav(ord, sentralbokstav)){
+        if(log) console.log(`Ordet ${ord} har ikkje sentralbokstaven ${sentralbokstav} i seg`);
+        return false;
+    }
+    if(!harAlle(ord, ringBokstavar + sentralbokstav)){
+        if(log) console.log(`ordet ${ord} er samansett av bokstavar som ikkje inngår i ${ringBokstavar + sentralbokstav}`);
+        return false;
+    }
+    if(log) console.log(`Ordet ${ord} har gått gjennom all testar og skal være gyldig`);
+    return true;
+}
+
+async function bieLoad(uteChars, sentralChar){
+	let alleChars = uteChars + sentralChar;
+	let streng = "";
+	streng  = await fetch('words.txt')
+		.then(resp => resp.text())
+		.then(text => {
+			return text;
+		});
+	//console.log(streng);
+	let ord = "";
+	let outpArray = new Array();
+	console.log(streng.length);
+	for(let i = 0; i < streng.length; i++){
+		if(streng[i] == "\n"){
+			//console.log(ord);
+			if(gyldigBieOrd(ord, 7,4,uteChars,sentralChar))
+			{
+				outpArray.push(ord);
+			}
+			ord = "";
+		}else{
+			ord += streng[i];
+		}
+
+	}
+	for(ord of outpArray){
+		console.log(ord);
+	}
+}
+
 /**
  * Lagar ny liste med ord som skal brukast til å avklare
  * bokstavar, skal returnere ord som har null av bokstavane 
@@ -195,6 +352,11 @@ function clr(){
 	document.getElementById("Snuseord").innerHTML = "";
 	document.getElementById("leiteChars").value = "";
     medMenFeilPlass = "";
+}
+function bieClr(){
+	for(let i = 0; i <= 6;i++){
+		dg("BI-" + i.toString()).value = "";
+	}
 }
 let moglegeOrd = new Array();
 

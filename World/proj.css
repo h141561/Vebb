@@ -1,0 +1,161 @@
+        .gjisseFelt{
+            width: 90%;
+            background-color:lightyellow;
+            border-radius: 0.2em;
+            font-size: 3em;
+            margin: 1px;
+        }
+        .biefelt{
+            width: 6rem;
+            height: 6rem;
+            border: 0.1em gray solid;
+            font-size: 5em;
+            text-align: center;
+            text-transform: capitalize;
+        }
+        .innFelt{
+            width: 90%;
+            text-decoration: none;
+            text-align: center;
+            font-size: 4em;
+            border: 3px red solid;
+            background-color: lightgreen;
+            color: white;
+            border-radius: 0.2em;
+            margin: 1px;
+        }
+        .gjisseKontainer{
+            border: 2px black solid;
+            border-radius: 1em;
+            display: inline-grid;
+            padding: 1em;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            width: 100%;
+            max-width: 400px;
+            justify-content: space-evenly;
+            
+        }
+        #posisjonar{
+        }
+        #rak{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        div{
+           
+        }
+        #snusar{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+        input{
+            height: 1em;
+            font-size: 2em;
+            margin: 10px;
+        }
+        #moglege{
+            background-color: wheat;
+            display: block;
+            float:right;
+            display: grid;
+        }
+        #svar{
+            background-color: wheat;
+            width: 45%;
+            display: inline-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            float: right;
+        }
+        #feilPos{
+        }
+        #leiteChars{
+            grid-column: 2 /span 2;
+        }
+        #feilPos > *{
+            
+        }
+        .kanskjeFelt{
+
+        }
+        #kontrollar{
+            
+        }
+        #kontrollar > input{
+            width: 100%;
+            height: 1.3em;
+        }
+        button{
+            width: 49%;
+            display:  inline;
+        }
+        #ikkjeMed{
+            background-color: red;
+        }
+        #med{
+            background-color: rgb(179, 179, 16);
+        }
+        #med, #ikkjeMed{
+            grid-column: 2 /span 3;
+        }
+        .koyrSlett{
+            grid-column:  span 2;
+            width: 90%;
+        }
+        ul{
+            list-style-type: none;
+        }
+        li{
+            text-decoration: none;
+        }
+
+ 
+        .tooltipText{
+            visibility: hidden;
+
+        }
+        .toolTip:hover > *{ 
+            visibility: visible;
+        }
+        .tooltipText{
+            visibility: hidden;
+            position: relative;
+            background-color: black;
+            color: wheat;
+            border: 1px black solid;
+            padding: 0.5em;
+        }
+        .forklaring{
+            
+            width: 100%;
+            border:  1px red solid;
+            grid-row: 1 / -1;
+            grid-column: 1 / -1 ;
+            margin: 1px;
+            text-align: center;
+        }
+        h3{
+
+        }
+
+        #bieboks{
+            max-width: 400px;
+            border: 1px red solid;
+            display: flex;
+            flex-direction: column;
+        }
+        .bieRekke{
+            display: flex;
+            flex-direction: row;
+            justify-items: center;
+            justify-content: center;
+            border: 1px green solid;
+        }
+        .bieRekke > *{
+
+        }
+        #BI-0{
+            background-color: rgb(237, 197, 122);
+        }

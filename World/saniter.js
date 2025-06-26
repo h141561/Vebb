@@ -21,7 +21,7 @@ function skrivTilFil(filnamn, strengArray){
     
 }
 
-function main(filnamn = "word-bank.csv"){
+function main(filnamn = "words-bank.csv"){
     let infil = fs.readFileSync(filnamn, "utf-8");
     let strengar = new Array();
     let ord = "";
