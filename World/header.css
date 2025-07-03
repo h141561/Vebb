@@ -1,0 +1,14 @@
+
+#hovud{
+    width: 100vw;
+    display: flex;
+    background-color: gray;
+    border: 1px blue double;
+    margin: -10px;
+}
+.valgt{
+    background-color: red;
+}
+.uvalgt{
+    background-color: blue;
+}

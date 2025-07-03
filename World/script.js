@@ -1,5 +1,5 @@
 /**
- * Vibbekoda som faen
+ * Vibbekoda litt
  * @param {*} str 
  * @returns 
  */
@@ -135,6 +135,10 @@ function bestaarAv(ord, chars){
 		}
 	}
 	return true;
+}
+
+function klikkOgKopier(streng){
+	
 }
 
 function contains(ord, chars){

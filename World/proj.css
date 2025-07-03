@@ -165,7 +165,7 @@
 
         #bieboks{
             max-width: 300px;
-            
+            margin-top: 2em;
             display: flex;
             flex-direction: column;
             padding: 1em;
