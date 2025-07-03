@@ -1,3 +1,27 @@
+/**
+ * Vibbekoda som faen
+ * @param {*} str 
+ * @returns 
+ */
+function hasNoDuplicateCharacters(str) {
+    // Create a set to keep track of the characters we've seen
+    let seenCharacters = new Set();
+
+    // Iterate over each character in the string
+    for (let char of str) {
+        // If the set already has the character, return false
+        if (seenCharacters.has(char.toLowerCase())) {
+            return false;
+        }
+
+        // Add the character to the set
+        seenCharacters.add(char.toLowerCase());
+    }
+
+    // If we made it through the loop without finding duplicates, return true
+    return true;
+}
+
 
 /** Gjer tilbake referanse til HTML-dokumentet med id som ein gjer
  *  @param {string} inp ID til noden ein vil ha
@@ -95,6 +119,22 @@ function harBokstav(ord, chars){
         }
     }
     return false;
+}
+/**
+ * sjekkar om eit ord berre har bosktavar som inngår i ei rekke bokstavar
+ * @param {string} ord ordet som skal sjekkast
+ * @param {string} chars bokstavar
+ */
+function bestaarAv(ord, chars){
+	for(bokstav of ord){
+		if(chars.includes(bokstav)){
+			continue;
+		}else{
+			//console.log(bokstav + " inngår ikkje i " + chars);
+			return false;
+		}
+	}
+	return true;
 }
 
 function contains(ord, chars){
@@ -237,7 +277,7 @@ function filtrer(){
 	console.log(umoglegeOrd)
 
 }
-function bieSok(){
+async function bieSok(){
 	let uteChars = "";
 	for(let i = 1; i <= 6; i++){
 		let id = "BI-" + i.toString();
@@ -245,11 +285,31 @@ function bieSok(){
 	}
 	let sentralChar = dgv("BI-0");
 
-	if(moglegeOrd.length <= 0){
-		moglegeOrd = bieLoad(uteChars, sentralChar)
+	if(moglegeOrd.length <= 1){
+		moglegeOrd = await bieLoad(uteChars, sentralChar)
 	}
-	//console.log(moglegeOrd);
-
+	console.log(moglegeOrd.length);
+	let bieOrdLst = new Array()
+	let panListe = "";
+	let linje = "";
+	
+	for(ord of moglegeOrd){
+		linje = `<li>${ord}</li>`;
+		if(hasNoDuplicateCharacters(ord) && ord.length == 7){
+			panListe += linje;
+		}else if(bieOrdLst[ord.length] == undefined){
+			bieOrdLst[ord.length] = linje;
+		}else{
+			bieOrdLst[ord.length] += linje;
+		}
+		
+	
+	}
+	dg("7Char").innerHTML = bieOrdLst[7];
+	dg("6Char").innerHTML = bieOrdLst[6];
+	dg("5Char").innerHTML = bieOrdLst[5];
+	dg("4Char").innerHTML = bieOrdLst[4];
+	dg("pangram").innerHTML = panListe;
 
 }
 
@@ -261,6 +321,11 @@ function bieSok(){
  * @returns {boolean} true om ordet er gyldig, False om ordet ikkje skal takast med
  */
 function gyldigBieOrd(ord, ovreGrense, nedreGrense, ringBokstavar, sentralbokstav, log = false){
+	let alleBokstavar = ringBokstavar + sentralbokstav;
+	if(log){
+		console.log(ringBokstavar + sentralbokstav + " " + alleBokstavar);
+		console.log(`Sjekkar ${ord} med bokstavane ${ringBokstavar} og sentral ${sentralbokstav}`);
+	}
     if(ord.length > ovreGrense){
         if(log) console.log(`Ordet ${ord} er for långt, ordet har ${ord.length} som er lengre enn ${ovreGrense}`);
         return false;
@@ -273,11 +338,11 @@ function gyldigBieOrd(ord, ovreGrense, nedreGrense, ringBokstavar, sentralboksta
         if(log) console.log(`Ordet ${ord} har ikkje sentralbokstaven ${sentralbokstav} i seg`);
         return false;
     }
-    if(!harAlle(ord, ringBokstavar + sentralbokstav)){
-        if(log) console.log(`ordet ${ord} er samansett av bokstavar som ikkje inngår i ${ringBokstavar + sentralbokstav}`);
+    if(!bestaarAv(ord, alleBokstavar)){
+        if(log) console.log(`ordet "${ord}" er samansett av bokstavar som ikkje inngår i ${alleBokstavar}`);
         return false;
     }
-    if(log) console.log(`Ordet ${ord} har gått gjennom all testar og skal være gyldig`);
+    if(log) console.log(`Ordet ${ord}  ✔️ har gått gjennom all testar og skal være gyldig`);
     return true;
 }
 
@@ -287,6 +352,8 @@ async function bieLoad(uteChars, sentralChar){
 	streng  = await fetch('words.txt')
 		.then(resp => resp.text())
 		.then(text => {
+			streng = text;
+			//console.log("Loggar " + text)
 			return text;
 		});
 	//console.log(streng);
@@ -296,19 +363,31 @@ async function bieLoad(uteChars, sentralChar){
 	for(let i = 0; i < streng.length; i++){
 		if(streng[i] == "\n"){
 			//console.log(ord);
-			if(gyldigBieOrd(ord, 7,4,uteChars,sentralChar))
+			if(gyldigBieOrd(ord, 7,4,uteChars ,sentralChar,false))
 			{
+				//console.log(ord);
 				outpArray.push(ord);
 			}
 			ord = "";
 		}else{
-			ord += streng[i];
+			if(bestaarAv(streng[i], "abdcefghijklmnopqrstuvwxyz"))
+				ord += streng[i];
 		}
 
 	}
-	for(ord of outpArray){
-		console.log(ord);
+	console.log("outputarray = " + outpArray.length);
+
+	let sorterteOrd = new Array();
+	for(let i = 7; i >= 4; i--){
+		for(ord of outpArray){
+			if(ord.length == i){
+				sorterteOrd.push(ord);
+			}
+		}
 	}
+	outpArray = sorterteOrd
+	
+	return sorterteOrd;
 }
 
 /**

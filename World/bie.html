@@ -19,13 +19,26 @@
         <input id="BI-4" type="text" name="" class="biefelt gjisseFelt" id="" maxlength="1">
     </div>
     <div class="bieRekke">
-        <input id="BI-5" type="text" name="" class="biefelt gjisseFelt" id="" maxlength="1">
+        <input id="BI-5" style="color: blue !important;" type="text" name="" class="biefelt gjisseFelt" id="" maxlength="1">
         <input id="BI-6" type="text" name="" class="biefelt gjisseFelt" id="" maxlength="1">
     </div>
     </div>
-    <div>
-        <ul id="bieListe"></ul>
-    </div>
+    <table id="bieLister">
+        <tr>
+            <th>Pangram</th>
+            <th>7</th>
+            <th>6</th>
+            <th>5</th>
+            <th>4</th>
+        </tr>
+        <tr>
+            <th><ul class="bieUL" id="pangram"></ul></th>
+            <th><ul class="bieUL" id="7Char"></ul></th>
+            <th><ul class="bieUL" id="6Char"></ul></th>
+            <th><ul class="bieUL" id="5Char"></ul></th>
+            <th><ul class="bieUL" id="4Char"></ul></th>
+        </tr>
+    </table>
     <button onclick="bieSok()">sok</button>
     <button onclick="bieClr()">Clear
 

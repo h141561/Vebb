@@ -1,6 +1,6 @@
         .gjisseFelt{
             width: 90%;
-            background-color:lightyellow;
+            background-color:rgb(245, 245, 152);
             border-radius: 0.2em;
             font-size: 3em;
             margin: 1px;
@@ -8,10 +8,18 @@
         .biefelt{
             width: 6rem;
             height: 6rem;
-            border: 0.1em gray solid;
+            border: 0px;
             font-size: 5em;
+            margin-top: -0.3em;
             text-align: center;
-            text-transform: capitalize;
+            clip-path: polygon(-50% 50%,50% 100%,150% 50%,50% 0);
+            outline: none;
+            
+        }
+        #BI-3{
+            
+            text-decoration: none;
+            outline: none;
         }
         .innFelt{
             width: 90%;
@@ -44,6 +52,21 @@
         }
         div{
            
+        }
+        #bieLister{
+            display: flex;
+            flex-direction: row;
+
+
+        }
+        #bieListe{
+            font-family: monospace;
+        }
+        #pangram{
+            color: red;
+        }
+        .bieUL{
+            font-family: monospace;
         }
         #snusar{
             display: grid;
@@ -141,21 +164,33 @@
         }
 
         #bieboks{
-            max-width: 400px;
-            border: 1px red solid;
+            max-width: 300px;
+            
             display: flex;
             flex-direction: column;
+            padding: 1em;
         }
         .bieRekke{
             display: flex;
             flex-direction: row;
             justify-items: center;
             justify-content: center;
-            border: 1px green solid;
+            
         }
         .bieRekke > *{
 
         }
         #BI-0{
-            background-color: rgb(237, 197, 122);
+            background-color: rgb(174, 126, 36);
+        }
+        ul{
+            
+            border: 1px red dotted; 
+            min-height: 200%;
+            display: inline-block;
+            text-align: center;
+            
+        }
+        th{
+            border: 1px green solid;
         }
