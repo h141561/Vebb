@@ -27,13 +27,20 @@
     <p>Moglege ord: <span id="alternativ"></span></p>
     
     <div class="gjisseKontainer" id="posisjonar">
-        <h1 class="forklaring" title="Skriv in alle grøne(bekrefta) bokstavar i den rekkefølga dei er i">Bekrefta bokstavar</h1>
+        <h1 class="forklaring" title="Skriv in alle grøne(bekrefta) bokstavar i den rekkefølga dei er i">
+            <span class="forklaring" id="bekrefta" onclick="toggleForklaring('riktigForklaring')">Bekrefta bokstavar</span>
+        </h1>
         <input id="0char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
         <input id="1char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
         <input id="2char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
         <input id="3char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">        
         <input id="4char" autocomplete="off" class="gjisseFelt innFelt" type="text" maxlength="1">
     </div><br>
+    <div class="infoBoks hidden" id="riktigForklaring" style="">
+        <img src="bilete/riktigplass.png" alt="">
+        <button onclick="toggleForklaring('riktigForklaring')">X</button>
+        Skriv in tinga
+    </div>
     <div class="gjisseKontainer" id="feilPos">
         <h1 class="forklaring">
             Feilposisjonerte bokstavar
@@ -58,5 +65,7 @@
         <button onclick="snus()">Leit</button>
     </div>
     </div>
+
+
 </body>
 </html>

@@ -1,14 +1,40 @@
 
 #hovud{
     width: 100vw;
+    height: 5vh;
     display: flex;
     background-color: gray;
     border: 1px blue double;
     margin: -10px;
+    justify-content: center;
+    align-items: end;
+    margin-bottom: 1em;
+}
+nav{
+    border: 1px red solid;
+}
+.navKnapp{
+    border: 3px black solid;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom: 0px transparent;
+    text-decoration: none;
+    height: 4em;
+    padding: 0.2em;
 }
 .valgt{
-    background-color: red;
+    background-color: yellow;
 }
 .uvalgt{
-    background-color: blue;
+    background-color: gray;
+}
+.infoBoks{
+    z-index: 100;
+    margin: auto;
+    position: absolute;
+    background-color: white;
+    box-shadow: 10em 10em 10em 10em black ;
+}
+.hidden{
+    display: none;
 }

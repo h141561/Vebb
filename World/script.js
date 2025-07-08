@@ -1,3 +1,8 @@
+function toggleForklaring(id){
+	elem = dg(id);
+	elem.classList.toggle("hidden");
+}
+
 /**
  * Vibbekoda litt
  * @param {*} str 

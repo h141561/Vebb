@@ -1,27 +1,23 @@
 
 function lastHead(currPage){
     let header = dg("hovud");
-    header.innerHTML = "<p>hei</p>"
-    let navbar = document.createElement("nav");
     
-    let index = document.createElement("a");
-        index.href = 'index.html';
-        if(index.href == currPage)
-            index.classList.add("valgt");
-        else
-            index.classList.add("uvalgt");
-        index.innerText = "WordleLøysar";
-        navbar.appendChild(index);
-
-    let bie = document.createElement("a");
-        bie.href = 'bie.html';
-        if(bie.href == currPage)
-            bie.classList.add("valgt");
-        else   
-            bie.classList.add("uvalgt");
-        bie.innerText = "SpellingBee løysar";
-        navbar.appendChild(bie);
-
+    let navbar = document.createElement("nav");
+    let navSideGen  = (sidenamn, overskrift) =>{
+        let side = document.createElement("a");
+        side.href = sidenamn;
+        side.classList.add("uvalgt");
+        side.classList.add("navKnapp")
+        side.innerText = overskrift;
+        if(sidenamn == currPage){
+            side.classList.remove("uvalgt");
+            side.classList.add("valgt");
+        }
+        navbar.appendChild(side);   
+    }
+    navSideGen("index.html", "WordleLøysar");
+    navSideGen("bie.html", "SpellBeeLøysar");
+    navSideGen("Pokemon.html", "Pokemon");
     header.appendChild(navbar);
 }
 

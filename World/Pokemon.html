@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="header.js"></script>
+    <script src="script.js"></script>
+    <script src="Pokemans.js"></script>
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="proj.css">
+    <script>
+        
+/** Gjer tilbake referanse til HTML-dokumentet med id som ein gjer
+ *  @param {string} inp ID til noden ein vil ha
+ *  
+ * @returns {HTMLElement} referanse til ynskja element;
+ */
+function dg(inp){
+
+        let ret  = document.getElementById(inp);
+        if(ret == null)
+            console.log(inp + " Lagde eit nullobjekt");
+        return ret;
+}
+
+/**
+ * 
+ * @param tekst Streng som skal beskrive kva som har skjedd
+ * 
+ * @returns ingenting
+ */
+function Lerror(tekst){
+    console.log("Lerror > " + tekst);
+}
+
+/**
+ * Ein funksjon som gjer tilbake verdifeltet til eit HTML-element, bruk til
+ * å kutte ned på skriving og rot i funksjonane
+ * 
+ * @see {dg}
+ * @param {string} inp ID til noden ein vil ha
+ * @returns {HTMLElement} element.value til noden
+ */
+function dgv(inp){
+    return dg(inp).value;
+}
+
+/**
+ * Gjer tilbake ei samling med tilfeldig genererte tal, lengde på arrayet, kor
+ * månge desimalar tala skal ha og kor store tala skal være kan bestemmast med
+ * argumenta
+ * 
+ * @author Leon samson Vestby
+ * 
+ * @param {number} antal Antal tilfeldige tal som skal genererast, default = 10
+ * @param {number} desimalar Antal desimalar, default = 0
+ * @param {number} maks maksimal verdi av dei genererte tala default = 100
+ * 
+ * @returns {Array} ferdig laga array med verdiane spesifisert
+ */
+function genererTilfeldig(antal = 10, desimalar = 0, maks = 100){
+    let ret  = new Array();
+    for(let i = 0; i < antal; i++){
+        let nyttTal = (Math.random() * maks).toFixed(desimalar);
+        ret.push(nyttTal);
+    }
+    return ret;
+}
+
+/**
+ * Gjer om ei samling til tabellradar som kann leggast til innerHTML
+ * i eit HTMElement
+ * 
+ * @param {Array} samling Arrayet som skal skrivast ut
+ * @param {string} namn namn til rada som skal stå i fyrste kolonne
+ * 
+ * @returns {string} returnerar alle elementa i i samling som eigne td-
+ *      element
+ */
+function samlingTilCol(samling, namn  = "Rad"){
+    let streng = "<tr>";
+    if(namn)
+        streng += `<td>${namn}</td>`;
+    for(val of samling){
+        streng += `<td> ${val} </td>`;
+    }
+    return streng + "</tr>";
+}
+    
+
+function tst(){
+    samlingTilCol()
+}
+    </script>
+    <script>
+        function onload(){
+            function loadPokemon(tal = 3){
+                for(let i = 1; i <= tal ; i++){
+                fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+                    .then((res) => (res.json()))
+                    .then((pokemon) => {
+                        console.log(pokemon);
+                        nytt = document.createElement("kort");
+                        nytt.innerHTML += `<img src="${pokemon.sprites.other['official-artwork'].front_default}">
+                        <h2>#${pokemon.id} ${pokemon.name}</h2><h3>Abilities</h3>`;
+                        for(ability of pokemon.abilities){
+                            let colour = "black";
+                            if(ability.is_hidden)colour = "grey";
+                            nytt.innerHTML += `
+                                <details url="${ability.ability.url}">
+                                    <summary style="color:${colour}">${ability.ability.name}</summary>
+                                    <abilSum class="${ability.ability.name}" url="${ability.ability.url}" onfocus="blink()">Her kjem det, sannsynlegvis</abilSum>
+                                </details>`
+                        }
+                        nytt.innerHTML += `<audio controls> <source src="${pokemon.cries.latest}" type="audio/ogg"></audio>`
+                        dg("pokemonBeholdar").appendChild(nytt);
+                    });
+                }
+            }
+        }
+
+        function blink(){
+            console.log("blink");
+        }
+        function skrivAbilities(){
+            const summarar = document.getElementsByTagName("abilSum");
+            console.log(summarar[0].getAttribute("url"));
+            
+            for(let i = 0; i < summarar.length; i++){
+                console.log("fetchar summar i " + summarar[i]);
+                fetch(summarar[i].getAttribute("url"))
+                    .then((res) => (res.json()))
+                    .then((ability) => {
+                        console.log(ability)
+                        for(entry of ability.effect_entries){
+                            if(entry.language.name == "en")
+                                summarar[i].innerHTML = entry.effect;
+                        }
+                        //summarar[i].innerHTML = ability.effect_entries[0].effect;
+                    });
+                
+            }
+        }
+    </script>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .kortBeholdar{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        kort{
+            width: 100px;
+            border: 1px black solid;
+            
+            margin: 2px;
+            border-radius: 1em;
+            
+            
+        }
+        #pokemonBeholdar > kort{
+            width: 300px;
+        }
+        kort > img{
+            width: 100%;
+        }
+        kort > *{
+            
+            width: 100%;
+
+        }
+        audio{
+            width: 100%;
+        }
+        abilSum{
+            padding-left: 10px;
+            margin-left: 10px;
+            display: inline;
+        }
+        h1{
+            text-align: center;
+            border: 1px black solid;
+            border-radius: 1em;
+            text-shadow: 1px 1px white , 1px -1px white , -1px 1px white   , -1px -1px white;
+            
+        }
+        h1::first-letter{
+            text-transform: capitalize;
+        }
+        summary{
+            font-size: larger;
+            background-color: #330c0c1c;
+        }
+    </style>
+</head>
+<body onload="lastHead('Pokemon.html')">
+    <header id="hovud">
+
+    </header>
+
+    <button onclick="populatePokemons()">
+        Popularii
+    </button>
+    <button onclick="teiknPokemon()">Bygg Pokemon</button>
+    <div class="kortBeholdar" id="pokemonBeholdar">
+    </div>
+</body>
+</html>
