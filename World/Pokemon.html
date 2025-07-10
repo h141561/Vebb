@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="proj.css">
+    <link rel="stylesheet" href="pokemon.css">
     <script>
         
 /** Gjer tilbake referanse til HTML-dokumentet med id som ein gjer
@@ -158,6 +159,10 @@ function tst(){
             margin: 2px;
             border-radius: 1em;
             padding-bottom: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-content: center;
             
             
         }
@@ -180,16 +185,14 @@ function tst(){
             margin-left: 10px;
             display: inline;
         }
-        moveList{
 
+        .pokemonMoveKnapp{
+            width: 50%;
+            font-size: larger;
+            margin: auto;
+            margin-top: 0.1em
         }
-        moveEntry{
 
-        }
-        .moveOversikt{
-            display: flex;
-            align-items: center;
-        }
         h1{
             text-align: center;
             border: 1px black solid;
@@ -204,20 +207,30 @@ function tst(){
             font-size: larger;
             background-color: #330c0c1c;
         }
+
+        .levelNum{
+            color: white;
+            width: 10%;
+        }
     </style>
 </head>
 <body onload="lastHead('Pokemon.html')">
     <header id="hovud">
 
     </header>
-
-    <button onclick="populatePokemons()">
-        Popularii
-    </button>
-    <button onclick="teiknPokemon()">Bygg Pokemon</button>
-    <button onclick="displayMoveList('')">Bygg moveListe</button>
+    <div id="moveBeholdar">
+        <button onclick="skjulMoves()" id="StengeKnapp">X</button>
+    </div>
+    <div id="velgar">
+        <h2>Skriv in antal Pokemon</h2>
+        <input id="antalMons" type="number" max="155">
+        <button onclick="populateCards()">
+            Fyll in
+        </button>
+    </div>
     <div class="kortBeholdar" id="pokemonBeholdar">
     </div>
-    <div id="moveBeholdar"></div>
+
+    
 </body>
 </html>

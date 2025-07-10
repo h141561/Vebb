@@ -1,0 +1,73 @@
+        .moveTekstDIV{
+            background-color: white;
+            padding: 0.1em;
+            margin-top: 0px;
+            border-bottom-right-radius: 1em;
+            border-bottom-left-radius: 1em;
+            width: 80%;
+            margin-left: 15%;
+            display: grid;
+            grid-template-columns: 4fr 1fr 1fr 1fr ;
+        }
+        #moveBeholdar{
+            display: none;
+            position: fixed;
+            margin: auto;
+            left: 10%;
+            height: 80%;
+            z-index: 100;
+            padding-top: 0px;
+            overflow: auto;
+            width: 80%;
+            top: 10;
+            background-color: wheat;
+            border: 1px blue solid;
+            box-shadow: 0 0 100px ;
+        }
+        moveEntry{
+
+        }
+        .moveOversikt{
+            display: flex;
+            align-items: center;
+            border-radius: 1em;
+            padding: -0px;
+            padding-left: 1em;
+            margin-top: 2px;
+            max-height: 30px;
+            font-size: smaller;
+        }
+        #velgar{
+            width: 90%;
+            min-width: 100px;
+            display: flex;
+            align-items: center;
+        }
+        #velgar:first-child{
+            width: 90%;
+        }
+        #velgar > *{
+            height: 100px;
+            border: 1px red dashed;
+            
+        }
+        #StengeKnapp{
+            width: 100%;
+            background-color: red;
+            height: 100px;
+            color: white;
+            font-size: larger;
+            margin-bottom: 1em;
+            border-top-left-radius: 0em;
+            border-top-right-radius: 0em;
+        }
+        .pokeIkon{
+            width: 2em;
+            height: 2em;
+            margin: 0.3em;
+            /*
+            border: 1px solid blue;
+            border-radius: 50%;
+            padding: 0.3em;
+            */
+        }

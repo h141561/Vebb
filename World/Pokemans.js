@@ -1,10 +1,11 @@
 var PokeList = null;
 var abilityList = {};
+var MOVELIST = new Array();
 async function populatePokemons(params) {
     //return om pokelist er dar
     if(PokeList){return;}
     PokeList = new Array();
-    let alleJson = await getMons();
+    let alleJson = await getMons(params);
 
 }
 async function teiknPokemon(){
@@ -45,6 +46,19 @@ async function kortlagar(pokemon){
         kort.appendChild(abil);
 
     }
+    let moveKnapp = document.createElement("button");
+        moveKnapp.classList.add("pokemonMoveKnapp");
+        moveKnapp.innerText ="Moves";
+        let index = 0;
+        for(i in PokeList){
+            if(PokeList[i].name == pokemon.name)
+            {
+                index = i;
+            }
+        }
+        moveKnapp.setAttribute("pokemon", index);
+        moveKnapp.setAttribute("onClick", "lagPokemonMoveListe(this)");
+        kort.appendChild(moveKnapp);
     return kort;
 }
 async function loadAbility(namn, link) {
@@ -59,9 +73,35 @@ async function loadAbility(namn, link) {
         });
     abilityList[namn] = description;
 }
+async function lagPokemonMoveListe(butt) {
+    let beholdar = dg("moveBeholdar");
+    beholdar.innerHTML = '<button onclick="skjulMoves()" id="StengeKnapp">X</button>';
+    console.log(butt);
+    let index = butt.getAttribute("pokemon");
+    console.log(index);
+    let pokemon = PokeList[index];
+    for(move of pokemon.info.moves){
+        gruppe = move.version_group_details.at(-1);
+        if(gruppe.move_learn_method.name != "level-up"){
+            continue; 
+            //fortsett og hopp over alle moves som ikkje er lert av lv-up
+        }
+        console.log(move);
+        displayMoveList(move.move.url, gruppe.level_learned_at);
+    }
+    beholdar.style.display = "block";
+}
 
-async function getMons(){
-    let json = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=3')
+async function populateCards(){
+    number = dgv("antalMons");
+    if(number < 3)
+        number = 3;
+    await populatePokemons(number);
+    await teiknPokemon();
+}
+
+async function getMons(num = 3){
+    let json = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${num}`)
         .then((res) => (res.json()))
         .then((pokemons) =>{
             console.log(pokemons);
@@ -86,25 +126,36 @@ async function fetchInfo(url) {
     //console.log(info);
     return info;
 }
-async function displayMoveList(url){
+async function displayMoveList(url, lvl = -1){
     let div = dg("moveBeholdar");
 
-    let move = await getMoveInfo("https://pokeapi.co/api/v2/move/13/");
+    let move = await getMoveInfo(url, lvl);
     console.log(move);
     div.appendChild(move);
 }
 
-async function getMoveInfo(url){
-    let move = await fetch(url)
+async function getMoveInfo(url, lvl = -1){
+    let move = null;
+    if(MOVELIST[url] == null){
+        move = await fetch(url)
         .then((res) => (res.json()))
         .then((info) => {
             return info;
         });
-    let entry = document.createElement("moveEntry");
+    }else{
+        move = MOVELIST[url];
+    }
     
-    let infoDiv = document.createElement("div");
+    let entry = document.createElement("details");
+    
+    let infoDiv = document.createElement("summary");
         infoDiv.style.backgroundColor = getPokemonTypeColor(move.type.name);
         infoDiv.classList.add("moveOversikt")
+
+    let level = document.createElement("h2");
+        level.classList.add("levelNum");
+        level.innerText = lvl;
+        infoDiv.appendChild(level);
 
     let overskrift = document.createElement("h2");
         overskrift.innerText = move.names[7].name;
@@ -114,8 +165,36 @@ async function getMoveInfo(url){
         ikon.src = `pokemonIkon/${move.type.name}.svg`;
         ikon.classList.add("pokeIkon");
         infoDiv.appendChild(ikon);
+    
+    let statusIkon = document.createElement("img");
+        statusIkon.classList.add("pokeIkon")
+        let moveType = move.damage_class.name;
+        console.log(moveType);
+        if(moveType == "special") statusIkon.src = "pokemonIkon/Pokemon_Icon_Special.svg";
+        if(moveType == "status") statusIkon.src = "pokemonIkon/Pokemon_Icon_Status.svg";
+        if(moveType == "physical") statusIkon.src = "pokemonIkon/Pokemon_Icon_Physical.svg";
+        infoDiv.appendChild(statusIkon)
+    entry.appendChild(infoDiv);
 
-    return infoDiv;
+    let forklaringsTekst = document.createElement("div");
+        forklaringsTekst.classList.add("moveTekstDIV");
+    let tekst = document.createElement("p");
+        tekst.innerText = move.effect_entries[0].effect;
+        forklaringsTekst.appendChild(tekst);
+    let PP = document.createElement("p")
+        PP.innerText = "PP " + move.pp;
+        forklaringsTekst.appendChild(PP);
+    let PWR = document.createElement("p")
+        if(move.power == null){
+            PWR.innerText = "PWR - "
+        }else{
+            PWR.innerText = "PWR " + move.power;
+        }
+        
+        forklaringsTekst.appendChild(PWR);
+    entry.appendChild(forklaringsTekst);
+        
+    return entry;
 
 }
 
@@ -133,7 +212,11 @@ function getPokemonBackground(pokemon){
     return `linear-gradient(to right, ${getPokemonTypeColor(color1)}, ${getPokemonTypeColor(color2)})`;
 }
 
-
+function skjulMoves(){
+    let beholdar = dg("moveBeholdar");
+    beholdar.style.display = "none";
+    beholdar.innerHTML = "";
+}
 
 /**
  * gjer tilbake ein div av ikonsom representerar pokemontypen
