@@ -17,7 +17,6 @@
             
         }
         #BI-3{
-            
             text-decoration: none;
             outline: none;
         }
@@ -113,6 +112,7 @@
         button{
             width: 49%;
             display:  inline;
+            border-radius: 1em;
         }
         #ikkjeMed{
             background-color: red;

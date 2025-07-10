@@ -155,9 +155,9 @@ function tst(){
         kort{
             width: 100px;
             border: 1px black solid;
-            
             margin: 2px;
             border-radius: 1em;
+            padding-bottom: 2em;
             
             
         }
@@ -179,6 +179,16 @@ function tst(){
             padding-left: 10px;
             margin-left: 10px;
             display: inline;
+        }
+        moveList{
+
+        }
+        moveEntry{
+
+        }
+        .moveOversikt{
+            display: flex;
+            align-items: center;
         }
         h1{
             text-align: center;
@@ -205,7 +215,9 @@ function tst(){
         Popularii
     </button>
     <button onclick="teiknPokemon()">Bygg Pokemon</button>
+    <button onclick="displayMoveList('')">Bygg moveListe</button>
     <div class="kortBeholdar" id="pokemonBeholdar">
     </div>
+    <div id="moveBeholdar"></div>
 </body>
 </html>

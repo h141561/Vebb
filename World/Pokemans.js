@@ -26,15 +26,19 @@ async function kortlagar(pokemon){
         kort.appendChild(getPokemonIconDiv(pokemon));
 
     for(ability of pokemon.abilities){
-        let hidden = ability.hidden;
+        let hidden = ability.is_hidden;
         ability = ability.ability;
         if(!abilityList[ability.name]){
             await loadAbility(ability.name, ability.url);
         }
         let abil = document.createElement("details");
             let summ = document.createElement("summary");
-                summ.innerText = ability.name;
                 abil.appendChild(summ);
+                summ.innerText = ability.name;
+                if(hidden){
+                    summ.style.color = "grey";
+                    summ.innerText += "(hidden)";
+                }
             let description = document.createElement("p")
                 description.innerText = abilityList[ability.name];
                 abil.appendChild(description);
@@ -57,7 +61,7 @@ async function loadAbility(namn, link) {
 }
 
 async function getMons(){
-    let json = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=70')
+    let json = await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=3')
         .then((res) => (res.json()))
         .then((pokemons) =>{
             console.log(pokemons);
@@ -82,6 +86,38 @@ async function fetchInfo(url) {
     //console.log(info);
     return info;
 }
+async function displayMoveList(url){
+    let div = dg("moveBeholdar");
+
+    let move = await getMoveInfo("https://pokeapi.co/api/v2/move/13/");
+    console.log(move);
+    div.appendChild(move);
+}
+
+async function getMoveInfo(url){
+    let move = await fetch(url)
+        .then((res) => (res.json()))
+        .then((info) => {
+            return info;
+        });
+    let entry = document.createElement("moveEntry");
+    
+    let infoDiv = document.createElement("div");
+        infoDiv.style.backgroundColor = getPokemonTypeColor(move.type.name);
+        infoDiv.classList.add("moveOversikt")
+
+    let overskrift = document.createElement("h2");
+        overskrift.innerText = move.names[7].name;
+        infoDiv.appendChild(overskrift);
+
+    let ikon = document.createElement("img");
+        ikon.src = `pokemonIkon/${move.type.name}.svg`;
+        ikon.classList.add("pokeIkon");
+        infoDiv.appendChild(ikon);
+
+    return infoDiv;
+
+}
 
 /**
  * returnerar ein linear gradient som samsvarar i frarge til typen pokemin
@@ -95,8 +131,10 @@ function getPokemonBackground(pokemon){
         color2 = pokemon.info.types[1].type.name;
     
     return `linear-gradient(to right, ${getPokemonTypeColor(color1)}, ${getPokemonTypeColor(color2)})`;
-    
 }
+
+
+
 /**
  * gjer tilbake ein div av ikonsom representerar pokemontypen
  * @param {pokemon} pokemon 
