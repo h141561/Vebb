@@ -40,6 +40,7 @@
         #velgar{
             width: 90%;
             min-width: 100px;
+            max-width: 400px;
             display: flex;
             align-items: center;
         }
@@ -47,9 +48,13 @@
             width: 90%;
         }
         #velgar > *{
-            height: 100px;
-            border: 1px red dashed;
+            height: 50px;
             
+            
+        }
+        #antalMons{
+            min-width: 40px;
+            max-width: 70px;
         }
         #StengeKnapp{
             width: 100%;

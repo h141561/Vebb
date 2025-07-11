@@ -3,7 +3,7 @@
     width: 100vw;
     height: 5vh;
     display: flex;
-    background-color: gray;
+    background-color: rgb(128, 128, 128);
     border: 1px blue double;
     margin: -10px;
     justify-content: center;
@@ -20,13 +20,14 @@ nav{
     border-bottom: 0px transparent;
     text-decoration: none;
     height: 4em;
+    background-color: lightgray;
     padding: 0.2em;
 }
 .valgt{
     background-color: yellow;
 }
 .uvalgt{
-    background-color: gray;
+    background-color:lightgray;
 }
 .infoBoks{
     z-index: 100;
